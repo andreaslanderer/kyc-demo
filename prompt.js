@@ -127,6 +127,7 @@ const relationBetweenPartnersPrompt = `
                 "id": "The id of the related person; leave empty of not available",
                 "relationType": "One of the following values: SPOUSE, PARENT, CHILD, GRANDPARENT, GRANDCHILD, SIBLING, UNKNOWN",
                 "dateOfBirth": "The date of birth of the related person; FORMAT: yyyy-mm-dd",
+                "dateOfDeath": "In case the related person is already deceased; FORMAT: yyyy-mm-dd"
                 "nationality": "The nationality of the related person; FORMAT: ISO 2-letter country code, e.g. CH, US",
                 "domicile": "The domicile of the related person, FORMAT: ISO 2-letter country code, e.g. CH, US"
                 "reasoning": "Please describe based on which information you came to your conclusion"
