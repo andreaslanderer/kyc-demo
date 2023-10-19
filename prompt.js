@@ -48,7 +48,7 @@ const personalDetailsPrompt = `
     --- Begin Output Structure ---
     
     {{
-        "firstName": "The first name of the person",
+        "firstName": "The first name of the person; if unknown leave empty, DON'T use the salutation (e.g. Frau, Herr, etc.)",
         "lastName": "The last name of the person",
         "dateOfBirth": "The date of birth of the person; FORMAT: yyyy-mm-dd",
         "nationality": "The nationality of the person; FORMAT: ISO 2-letter country code, e.g. CH, US",
@@ -128,8 +128,8 @@ const relationBetweenPartnersPrompt = `
                 "relationType": "One of the following values: SPOUSE, PARENT, CHILD, GRANDPARENT, GRANDCHILD, SIBLING, UNKNOWN",
                 "dateOfBirth": "The date of birth of the related person; FORMAT: yyyy-mm-dd",
                 "dateOfDeath": "In case the related person is already deceased; FORMAT: yyyy-mm-dd"
-                "nationality": "The nationality of the related person; FORMAT: ISO 2-letter country code, e.g. CH, US",
-                "domicile": "The domicile of the related person, FORMAT: ISO 2-letter country code, e.g. CH, US"
+                "nationality": "Comma-separated list of nationalities of the related person; FORMAT: ISO 2-letter country code, e.g. CH, US",
+                "domicile": "Comma-separated list of domiciles of the related person, FORMAT: ISO 2-letter country code, e.g. CH, US"
                 "reasoning": "Please describe based on which information you came to your conclusion"
             }}
         ]
