@@ -2,7 +2,14 @@ import express from 'express'
 import cors from 'cors'
 import {OpenAI} from 'langchain/llms/openai'
 import {PromptTemplate} from 'langchain/prompts';
-import {civilStatusPrompt, educationPrompt, personalDetailsPrompt, relationBetweenPartnersPrompt} from './prompt.js'
+import {
+    civilStatusPrompt,
+    educationPrompt,
+    employmentPrompt,
+    personalDetailsPrompt,
+    relationBetweenPartnersPrompt, selfEmploymentPrompt,
+    unemploymentPrompt
+} from './prompt.js'
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -23,16 +30,26 @@ const familySituationPrompts = [
     { information: "partnerRelations", prompt: PromptTemplate.fromTemplate(relationBetweenPartnersPrompt) }
 ]
 
-const professionalBackgroundPrompt = [
+const educationalBackgroundPrompt = [
     { information: "education", prompt: PromptTemplate.fromTemplate(educationPrompt) }
+]
+
+const employmentBackgroundPrompt = [
+    { information: "employment", prompt: PromptTemplate.fromTemplate(employmentPrompt) },
+    { information: "unemployment", prompt: PromptTemplate.fromTemplate(unemploymentPrompt) },
+    { information: "selfEmployment", prompt: PromptTemplate.fromTemplate(selfEmploymentPrompt) },
 ]
 
 app.post('/familySituationNew', async (req, res) => {
     await prompt(req, res, 'familySituation', familySituationPrompts);
 })
 
-app.post('/professionalBackgroundNew', async (req, res) => {
-    await prompt(req, res, 'professionalBackground', professionalBackgroundPrompt);
+app.post('/educationalBackgroundNew', async (req, res) => {
+    await prompt(req, res, 'educationalBackground', educationalBackgroundPrompt);
+})
+
+app.post('/employmentBackgroundNew', async (req, res) => {
+    await prompt(req, res, 'employmentBackground', employmentBackgroundPrompt);
 })
 
 async function prompt(req, res, promptGroupName, promptGroup) {
@@ -78,8 +95,9 @@ async function prompt(req, res, promptGroupName, promptGroup) {
 
 async function getCompletion(prompt) {
     const llm = new OpenAI({
-        modelName: 'gpt-3.5-turbo-16k-0613',
-        temperature: 0.0,
+        // modelName: 'gpt-3.5-turbo-16k-0613',
+        modelName: 'gpt-4',
+        temperature: 0,
         openAIApiKey: apiKeyOpenAI
     });
     return await llm.predict(prompt);
