@@ -1,37 +1,3 @@
-
-const systemPrompt = `
-    Please take the text below and extract the following data:
-
-    {text}
-    
-    Target structure:
-   
-    {{
-        "fullName": "The full name of the person as 'FirstName LastName'",
-        "dateOfBirth": "dd.mm.yyyy",
-        "relationshipStatus": "married, single, etc. "
-        "relationships": [
-            {{
-                "relation": "daughter, husband, mother, father, etc.",
-                "fullName": "The full name of the person as 'FirstName LastName",
-                "dateOfBirth": "dd.mm.yyyy",
-                "dateOfDeath": "dd.mm.yyyy"
-            }}
-        ]
-    }}
-
-    Names should always be displayed as "Firstname Lastname"
-    Feel free to fix any typos. 
-    Add an additional top-level property "remarks" for additional information and hints that do not fit the other properties. 
-    If you find any irregularities, contradictions or missing information please add them to the "remarks" property as well.
-    Your response must only contain the JSON object and nothing else!
-`
-
-const familySituationOfTheClientBackground = `
-    Family situation of the client:
-    {familySituationOfTheClient}
-`
-
 const personalDetailsPrompt = `
     Instruction: 
     Based on the background data provided basic personal details of the person.
@@ -41,7 +7,7 @@ const personalDetailsPrompt = `
     
     --- Begin Background ---
     
-    ${familySituationOfTheClientBackground}
+    {background}
     
     --- End Background --- 
     
@@ -68,7 +34,7 @@ const civilStatusPrompt = `
     
     --- Begin Background ---
     
-    ${familySituationOfTheClientBackground}
+    {background}
     
     --- End Background --- 
     
@@ -91,7 +57,7 @@ const noChildrenPrompt = `
     
     --- Begin Background ---
     
-    ${familySituationOfTheClientBackground}
+    {background}
     
     --- End Background --- 
     
@@ -113,7 +79,7 @@ const relationBetweenPartnersPrompt = `
     
     --- Begin Background ---
     
-    ${familySituationOfTheClientBackground}
+    {background}
     
     --- End Background --- 
     
@@ -181,10 +147,42 @@ const relationBetweenPartnersPrompt = `
     --- End Example ---
 `
 
+const educationPrompt = `
+    Instruction: 
+    Based on the background data provided determine the educational career of the person.
+    Your response should be according to the defined output structure.
+    Your response must only contain the JSON-array, each object representing a stage of his educational career.
+    Do not make assumptions: If you're missing information e.g. exact dates or names, leave them blank.
+    
+    --- Begin Background ---
+    
+    {background}
+    
+    --- End Background --- 
+    
+    --- Begin Output Array ---
+   
+   {{
+        "educations": [
+            {{ 
+                "institutionName": "The name of the school, high-school, university, etc.",
+                "institutionLocation": "The location of the school, high-school, university, etc.",
+                "degree": "The degree earned, e.g. B.Sc., M.Sc., PhD",
+                "startYear": "The year when the educational stage started; FORMAT: yyyy",
+                "endYear": "The year when the educational stage finished; FORMAT: yyyy",
+                "additionalInformation": "Any additional or missing information about the educational stage"
+                "reasoning": "Please describe based on which information you came to your conclusion"
+            }}
+        ]
+    }}
+    
+    --- End Output Array ---
+`
+
 export {
     civilStatusPrompt,
+    educationPrompt,
     noChildrenPrompt,
     personalDetailsPrompt,
-    relationBetweenPartnersPrompt,
-    systemPrompt
+    relationBetweenPartnersPrompt
 }
