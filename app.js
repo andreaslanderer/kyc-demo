@@ -1,13 +1,8 @@
 import express from 'express'
 import cors from 'cors'
-import { OpenAI } from 'langchain/llms/openai'
+import {OpenAI} from 'langchain/llms/openai'
 import {PromptTemplate} from 'langchain/prompts';
-import {
-    civilStatusPrompt,
-    personalDetailsPrompt,
-    relationBetweenPartnersPrompt,
-    systemPrompt
-} from './prompt.js'
+import {civilStatusPrompt, educationPrompt, personalDetailsPrompt, relationBetweenPartnersPrompt} from './prompt.js'
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -22,63 +17,32 @@ app.use(cors())
 app.set('json spaces', 2)
 app.options('*', cors())
 
-const prompts = [
+const familySituationPrompts = [
     { information: "personalDetails", prompt: PromptTemplate.fromTemplate(personalDetailsPrompt) },
     { information: "civilStatus", prompt: PromptTemplate.fromTemplate(civilStatusPrompt) },
     { information: "partnerRelations", prompt: PromptTemplate.fromTemplate(relationBetweenPartnersPrompt) }
 ]
 
-app.post('/familySituation', (req, res) => {
-    console.log('Calling familySituation endpoint')
-    const { text } = req.body
-    if (text) {
-        try {
-            const prompt = PromptTemplate.fromTemplate(systemPrompt)
-            prompt.format({ text }).then(formattedPrompt => {
-                console.log('Calling OpenAI service', formattedPrompt)
-                getKyc(formattedPrompt).then(result => {
-                    console.log(`OpenAI service call returned successfully with result`)
-                    const match = result.match(jsonPattern);
-                    if (match && match.length > 0) {
-                        res.send(JSON.parse(match[0]))
-                    } else {
-                        console.log('No response JSON found, therefore returning an empty object')
-                        res.send({})
-                    }
-                }, error => {
-                    console.error(error)
-                    res.status(500).send(error)
-                })
-            })
-        } catch (e) {
-            console.error(`Error while calling familySituation endpoint`, e)
-            res.status(500).send(e)
-        }
-    } else {
-        res.status(400).json({
-            message: 'Missing required property: text'
-        })
-    }
-})
-
-async function getKyc(prompt) {
-    const llm = new OpenAI({
-        modelName: 'gpt-4',
-        temperature: 0.0,
-        openAIApiKey: apiKeyOpenAI
-    })
-    console.log(`Create completions using model ${llm.modelName} and temperature ${llm.temperature}`)
-    return await llm.predict(prompt);
-}
+const professionalBackgroundPrompt = [
+    { information: "education", prompt: PromptTemplate.fromTemplate(educationPrompt) }
+]
 
 app.post('/familySituationNew', async (req, res) => {
-    console.log('Calling familySituation endpoint')
-    const { text } = req.body
+    await prompt(req, res, 'familySituation', familySituationPrompts);
+})
+
+app.post('/professionalBackgroundNew', async (req, res) => {
+    await prompt(req, res, 'professionalBackground', professionalBackgroundPrompt);
+})
+
+async function prompt(req, res, promptGroupName, promptGroup) {
+    console.log(`Calling ${promptGroupName} endpoint`)
+    const {text} = req.body
 
     try {
-        const promises = prompts.map(async p => {
+        const promises = promptGroup.map(async p => {
             const formattedPrompt = await p.prompt.format({
-                familySituationOfTheClient: text
+                background: text
             })
             console.log('Calling OpenAI service', p.information)
             const result = await getCompletion(formattedPrompt)
@@ -103,13 +67,14 @@ app.post('/familySituationNew', async (req, res) => {
         const results = {}
         resultsArray.forEach(r => results[r.prop] = r.value)
 
-        console.log('Finished calling familySituation endpoint')
+        console.log(`Finished calling ${promptGroupName} endpoint`)
         res.send(results)
     } catch (e) {
-        console.error(`Error while calling familySituation endpoint`, e)
+        console.error(`Error while calling ${promptGroupName} endpoint`, e)
         res.status(500).send(e)
     }
-})
+}
+
 
 async function getCompletion(prompt) {
     const llm = new OpenAI({
