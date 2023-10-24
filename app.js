@@ -67,6 +67,7 @@ async function getKyc(prompt) {
         temperature: 0.0,
         openAIApiKey: apiKeyOpenAI
     })
+    console.log(`Create completions using model ${llm.modelName} and temperature ${llm.temperature}`)
     return await llm.predict(prompt);
 }
 
