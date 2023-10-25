@@ -146,56 +146,144 @@
 			]
 		},
 		{
-			"name": "educationalBackgroundNew",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"text\": \"Cook was born in Mobile, Alabama, United States.[10][11] He was baptized in a Baptist church[12] and grew up in nearby Robertsdale. His father, Donald, was a shipyard worker,[13] and his mother, Geraldine, worked at a pharmacy.[10][14] Cook graduated from Robertsdale High School in Alabama in 1978.[15] He received a Bachelor of Science degree with a major in industrial engineering from Auburn University in 1982 and a Master of Business Administration from Duke University in 1988.[16][17] Karriere: Cook studierte bis 1982 Industrial Engineering an der Auburn University[9] und absolvierte seinen MBA 1988 an der Business School der Duke University.[10] Parallel dazu arbeitete er ab 1983 für IBM und war dort zuletzt für Herstellung und Vertrieb der PC-Sparte in Nord- und Südamerika verantwortlich. Zwischen 1994 und 1997 war Cook Chief Operating Officer (COO) der Reseller Division bei Intelligent Electronics, einem Computerhändler mit engen Verbindungen zu Apple. Nach der Zerschlagung von Intelligent Electronics 1997 arbeitete er ein halbes Jahr bei Compaq (als Vizepräsident für Corporate Materials).[11] Im Jahre 1998 kam Cook zu Apple, nachdem er von Steve Jobs persönlich angeworben worden war.[12] Er war zunächst Senior Vice President of Operations, ab 2002 Executive Vice President of Worldwide Sales and Operations und ab 2004 zudem für das Macintosh-Geschäft verantwortlich. Im Oktober 2005 wurde er COO von Apple. Im November 2005 wurde Cook Mitglied des Aufsichtsrats (Board of Directors) von Nike.[9] Bereits 2004 hatte Cook Jobs als CEO vertreten. Im Jahr 2009 vertrat er Jobs erneut für einige Monate, da dieser sich einer Lebertransplantation unterziehen musste. Am 17. Januar 2011 gab Jobs bekannt, dass er aus gesundheitlichen Gründen eine weitere Auszeit benötige. Cook führte daraufhin den Konzern zunächst vertretungsweise[13] und wurde nach dem Rücktritt von Steve Jobs am 24. August 2011 offiziell zum CEO berufen.[4][5][6] Im Oktober 2012 organisierte Cook die Führungsetage bei Apple umfassend neu: Scott Forstall wurde nach Konflikten mit Jonathan Ive und dem bei seiner Einführung in die Kritik geratenen Apple Maps entlassen. Daraufhin wurde Ive mehr Verantwortung für das Design des mobilen Betriebssystems Apple iOS übertragen. Craig Federighi übernahm gleichzeitig die Kontrolle über die iOS-Softwareentwicklung.[14] Apple brachte unter der Führung von Cook u. a. das iPad mini, einen stark überarbeiteten Mac Pro, die Apple Watch, die AirPods, den HomePod, den AirTag, die neue Produktkategorie Mac Studio sowie das iPhone X heraus. Apple etablierte unter der Führung von Tim Cook zudem mehrere Abo-Service-Dienste, u. a. Apple Music, Apple TV+, Apple Arcade und Apple Fitness+.\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "professionalBackground",
+			"item": [
+				{
+					"name": "education",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"Cook was born in Mobile, Alabama, United States.[10][11] He was baptized in a Baptist church[12] and grew up in nearby Robertsdale. His father, Donald, was a shipyard worker,[13] and his mother, Geraldine, worked at a pharmacy.[10][14] Cook graduated from Robertsdale High School in Alabama in 1978.[15] He received a Bachelor of Science degree with a major in industrial engineering from Auburn University in 1982 and a Master of Business Administration from Duke University in 1988.[16][17] Karriere: Cook studierte bis 1982 Industrial Engineering an der Auburn University[9] und absolvierte seinen MBA 1988 an der Business School der Duke University.[10] Parallel dazu arbeitete er ab 1983 für IBM und war dort zuletzt für Herstellung und Vertrieb der PC-Sparte in Nord- und Südamerika verantwortlich. Zwischen 1994 und 1997 war Cook Chief Operating Officer (COO) der Reseller Division bei Intelligent Electronics, einem Computerhändler mit engen Verbindungen zu Apple. Nach der Zerschlagung von Intelligent Electronics 1997 arbeitete er ein halbes Jahr bei Compaq (als Vizepräsident für Corporate Materials).[11] Im Jahre 1998 kam Cook zu Apple, nachdem er von Steve Jobs persönlich angeworben worden war.[12] Er war zunächst Senior Vice President of Operations, ab 2002 Executive Vice President of Worldwide Sales and Operations und ab 2004 zudem für das Macintosh-Geschäft verantwortlich. Im Oktober 2005 wurde er COO von Apple. Im November 2005 wurde Cook Mitglied des Aufsichtsrats (Board of Directors) von Nike.[9] Bereits 2004 hatte Cook Jobs als CEO vertreten. Im Jahr 2009 vertrat er Jobs erneut für einige Monate, da dieser sich einer Lebertransplantation unterziehen musste. Am 17. Januar 2011 gab Jobs bekannt, dass er aus gesundheitlichen Gründen eine weitere Auszeit benötige. Cook führte daraufhin den Konzern zunächst vertretungsweise[13] und wurde nach dem Rücktritt von Steve Jobs am 24. August 2011 offiziell zum CEO berufen.[4][5][6] Im Oktober 2012 organisierte Cook die Führungsetage bei Apple umfassend neu: Scott Forstall wurde nach Konflikten mit Jonathan Ive und dem bei seiner Einführung in die Kritik geratenen Apple Maps entlassen. Daraufhin wurde Ive mehr Verantwortung für das Design des mobilen Betriebssystems Apple iOS übertragen. Craig Federighi übernahm gleichzeitig die Kontrolle über die iOS-Softwareentwicklung.[14] Apple brachte unter der Führung von Cook u. a. das iPad mini, einen stark überarbeiteten Mac Pro, die Apple Watch, die AirPods, den HomePod, den AirTag, die neue Produktkategorie Mac Studio sowie das iPhone X heraus. Apple etablierte unter der Führung von Tim Cook zudem mehrere Abo-Service-Dienste, u. a. Apple Music, Apple TV+, Apple Arcade und Apple Fitness+.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/professionalBackground/education",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"professionalBackground",
+								"education"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "{{URL}}/educationalBackgroundNew",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"educationalBackgroundNew"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "employmentBackgroundNew",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"text\": \"Pre-Apple era After graduating from Auburn University, he spent one year of being unemployed (travelling Europe). Afterwards, Cook spent 12 years in IBM's personal computer business, ultimately serving as the director of North American fulfillment.[18] During this time, Cook also earned his MBA from Duke University, becoming a Fuqua Scholar in 1988.[19] Later, he served as the chief operating officer of the computer reseller division of Intelligent Electronics.[20] In 1997, he became the vice president for corporate materials at Compaq for six months, but left the position after being hired by Steve Jobs.[21] Apple era Early career In 1998, Steve Jobs asked Cook to join Apple. In a commencement speech at Auburn University, Cook said he decided to join Apple after meeting Jobs: Any purely rational consideration of cost and benefits lined up in Compaq's favor, and the people who knew me best advised me to stay at Compaq... On that day in early 1998, I listened to my intuition, not the left side of my brain or for that matter even the people who knew me best... no more than five minutes into my initial interview with Steve, I wanted to throw caution and logic to the wind and join Apple. My intuition already knew that joining Apple was a once-in-a-lifetime opportunity to work for the creative genius and to be on the executive team that could resurrect a great American company.[22] His first position was senior vice president for worldwide operations.[23] Cook closed factories and warehouses, and replaced them with contract manufacturers; this resulted in a reduction of the company's inventory from months to days. Predicting its importance, his group had invested in long-term deals such as advance investment in flash memory since 2005. This guaranteed a stable supply of what became the iPod Nano, then iPhone and iPad. Competitors at Hewlett-Packard described their cancelled HP TouchPad tablet computer and later said that it was made from \\\"cast-off, reject iPad parts\\\".[24] Cook's actions were recognized for keeping costs under control, and combined with the rest of the company, generated huge profits.[25] Cook giving the keynote at the 2012 World Wide Developers Conference In January 2007, Cook was promoted to lead operations[26] and served as chief executive in 2009, while Jobs was away on a leave of absence for health-related issues. In January 2011, Apple's board of directors approved a third medical leave of absence requested by Jobs. During that time, Cook was responsible for most of Apple's day-to-day operations, while Jobs made most major decisions.[27][28] Apple chief executive (2011–present) After Jobs resigned as CEO and became chairman of the board, Cook was named the new chief executive officer of Apple Inc. on August 24, 2011.[29][30] Six weeks later, on October 5, 2011, Jobs died due to complications from pancreatic cancer.[31]. He also founded a company together with Elon Musk, located in Palo Alto, which pursues the establishment of carbon-free energy sources.\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "employment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"Cook was born in Mobile, Alabama, United States.[10][11] He was baptized in a Baptist church[12] and grew up in nearby Robertsdale. His father, Donald, was a shipyard worker,[13] and his mother, Geraldine, worked at a pharmacy.[10][14] Cook graduated from Robertsdale High School in Alabama in 1978.[15] He received a Bachelor of Science degree with a major in industrial engineering from Auburn University in 1982 and a Master of Business Administration from Duke University in 1988.[16][17] Karriere: Cook studierte bis 1982 Industrial Engineering an der Auburn University[9] und absolvierte seinen MBA 1988 an der Business School der Duke University.[10] Parallel dazu arbeitete er ab 1983 für IBM und war dort zuletzt für Herstellung und Vertrieb der PC-Sparte in Nord- und Südamerika verantwortlich. Zwischen 1994 und 1997 war Cook Chief Operating Officer (COO) der Reseller Division bei Intelligent Electronics, einem Computerhändler mit engen Verbindungen zu Apple. Nach der Zerschlagung von Intelligent Electronics 1997 arbeitete er ein halbes Jahr bei Compaq (als Vizepräsident für Corporate Materials).[11] Im Jahre 1998 kam Cook zu Apple, nachdem er von Steve Jobs persönlich angeworben worden war.[12] Er war zunächst Senior Vice President of Operations, ab 2002 Executive Vice President of Worldwide Sales and Operations und ab 2004 zudem für das Macintosh-Geschäft verantwortlich. Im Oktober 2005 wurde er COO von Apple. Im November 2005 wurde Cook Mitglied des Aufsichtsrats (Board of Directors) von Nike.[9] Bereits 2004 hatte Cook Jobs als CEO vertreten. Im Jahr 2009 vertrat er Jobs erneut für einige Monate, da dieser sich einer Lebertransplantation unterziehen musste. Am 17. Januar 2011 gab Jobs bekannt, dass er aus gesundheitlichen Gründen eine weitere Auszeit benötige. Cook führte daraufhin den Konzern zunächst vertretungsweise[13] und wurde nach dem Rücktritt von Steve Jobs am 24. August 2011 offiziell zum CEO berufen.[4][5][6] Im Oktober 2012 organisierte Cook die Führungsetage bei Apple umfassend neu: Scott Forstall wurde nach Konflikten mit Jonathan Ive und dem bei seiner Einführung in die Kritik geratenen Apple Maps entlassen. Daraufhin wurde Ive mehr Verantwortung für das Design des mobilen Betriebssystems Apple iOS übertragen. Craig Federighi übernahm gleichzeitig die Kontrolle über die iOS-Softwareentwicklung.[14] Apple brachte unter der Führung von Cook u. a. das iPad mini, einen stark überarbeiteten Mac Pro, die Apple Watch, die AirPods, den HomePod, den AirTag, die neue Produktkategorie Mac Studio sowie das iPhone X heraus. Apple etablierte unter der Führung von Tim Cook zudem mehrere Abo-Service-Dienste, u. a. Apple Music, Apple TV+, Apple Arcade und Apple Fitness+.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/professionalBackground/employment",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"professionalBackground",
+								"employment"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "{{URL}}/employmentBackgroundNew",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"employmentBackgroundNew"
-					]
+				{
+					"name": "unemployment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"Cook was born in Mobile, Alabama, United States.[10][11] He was baptized in a Baptist church[12] and grew up in nearby Robertsdale. His father, Donald, was a shipyard worker,[13] and his mother, Geraldine, worked at a pharmacy.[10][14] Cook graduated from Robertsdale High School in Alabama in 1978.[15] He received a Bachelor of Science degree with a major in industrial engineering from Auburn University in 1982 and a Master of Business Administration from Duke University in 1988.[16][17] Karriere: Cook studierte bis 1982 Industrial Engineering an der Auburn University[9] und absolvierte seinen MBA 1988 an der Business School der Duke University.[10] Parallel dazu arbeitete er ab 1983 für IBM und war dort zuletzt für Herstellung und Vertrieb der PC-Sparte in Nord- und Südamerika verantwortlich. Zwischen 1994 und 1997 war Cook Chief Operating Officer (COO) der Reseller Division bei Intelligent Electronics, einem Computerhändler mit engen Verbindungen zu Apple. Nach der Zerschlagung von Intelligent Electronics 1997 arbeitete er ein halbes Jahr bei Compaq (als Vizepräsident für Corporate Materials).[11] Im Jahre 1998 kam Cook zu Apple, nachdem er von Steve Jobs persönlich angeworben worden war.[12] Er war zunächst Senior Vice President of Operations, ab 2002 Executive Vice President of Worldwide Sales and Operations und ab 2004 zudem für das Macintosh-Geschäft verantwortlich. Im Oktober 2005 wurde er COO von Apple. Im November 2005 wurde Cook Mitglied des Aufsichtsrats (Board of Directors) von Nike.[9] Bereits 2004 hatte Cook Jobs als CEO vertreten. Im Jahr 2009 vertrat er Jobs erneut für einige Monate, da dieser sich einer Lebertransplantation unterziehen musste. Am 17. Januar 2011 gab Jobs bekannt, dass er aus gesundheitlichen Gründen eine weitere Auszeit benötige. Cook führte daraufhin den Konzern zunächst vertretungsweise[13] und wurde nach dem Rücktritt von Steve Jobs am 24. August 2011 offiziell zum CEO berufen.[4][5][6] Im Oktober 2012 organisierte Cook die Führungsetage bei Apple umfassend neu: Scott Forstall wurde nach Konflikten mit Jonathan Ive und dem bei seiner Einführung in die Kritik geratenen Apple Maps entlassen. Daraufhin wurde Ive mehr Verantwortung für das Design des mobilen Betriebssystems Apple iOS übertragen. Craig Federighi übernahm gleichzeitig die Kontrolle über die iOS-Softwareentwicklung.[14] Apple brachte unter der Führung von Cook u. a. das iPad mini, einen stark überarbeiteten Mac Pro, die Apple Watch, die AirPods, den HomePod, den AirTag, die neue Produktkategorie Mac Studio sowie das iPhone X heraus. Apple etablierte unter der Führung von Tim Cook zudem mehrere Abo-Service-Dienste, u. a. Apple Music, Apple TV+, Apple Arcade und Apple Fitness+.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/professionalBackground/unemployment",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"professionalBackground",
+								"unemployment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "selfEmployment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"Cook was born in Mobile, Alabama, United States.[10][11] He was baptized in a Baptist church[12] and grew up in nearby Robertsdale. His father, Donald, was a shipyard worker,[13] and his mother, Geraldine, worked at a pharmacy.[10][14] Cook graduated from Robertsdale High School in Alabama in 1978.[15] He received a Bachelor of Science degree with a major in industrial engineering from Auburn University in 1982 and a Master of Business Administration from Duke University in 1988.[16][17] Karriere: Cook studierte bis 1982 Industrial Engineering an der Auburn University[9] und absolvierte seinen MBA 1988 an der Business School der Duke University.[10] Parallel dazu arbeitete er ab 1983 für IBM und war dort zuletzt für Herstellung und Vertrieb der PC-Sparte in Nord- und Südamerika verantwortlich. Zwischen 1994 und 1997 war Cook Chief Operating Officer (COO) der Reseller Division bei Intelligent Electronics, einem Computerhändler mit engen Verbindungen zu Apple. Nach der Zerschlagung von Intelligent Electronics 1997 arbeitete er ein halbes Jahr bei Compaq (als Vizepräsident für Corporate Materials).[11] Im Jahre 1998 kam Cook zu Apple, nachdem er von Steve Jobs persönlich angeworben worden war.[12] Er war zunächst Senior Vice President of Operations, ab 2002 Executive Vice President of Worldwide Sales and Operations und ab 2004 zudem für das Macintosh-Geschäft verantwortlich. Im Oktober 2005 wurde er COO von Apple. Im November 2005 wurde Cook Mitglied des Aufsichtsrats (Board of Directors) von Nike.[9] Bereits 2004 hatte Cook Jobs als CEO vertreten. Im Jahr 2009 vertrat er Jobs erneut für einige Monate, da dieser sich einer Lebertransplantation unterziehen musste. Am 17. Januar 2011 gab Jobs bekannt, dass er aus gesundheitlichen Gründen eine weitere Auszeit benötige. Cook führte daraufhin den Konzern zunächst vertretungsweise[13] und wurde nach dem Rücktritt von Steve Jobs am 24. August 2011 offiziell zum CEO berufen.[4][5][6] Im Oktober 2012 organisierte Cook die Führungsetage bei Apple umfassend neu: Scott Forstall wurde nach Konflikten mit Jonathan Ive und dem bei seiner Einführung in die Kritik geratenen Apple Maps entlassen. Daraufhin wurde Ive mehr Verantwortung für das Design des mobilen Betriebssystems Apple iOS übertragen. Craig Federighi übernahm gleichzeitig die Kontrolle über die iOS-Softwareentwicklung.[14] Apple brachte unter der Führung von Cook u. a. das iPad mini, einen stark überarbeiteten Mac Pro, die Apple Watch, die AirPods, den HomePod, den AirTag, die neue Produktkategorie Mac Studio sowie das iPhone X heraus. Apple etablierte unter der Führung von Tim Cook zudem mehrere Abo-Service-Dienste, u. a. Apple Music, Apple TV+, Apple Arcade und Apple Fitness+. e also founded a company together with Elon Musk, located in Palo Alto, which pursues the establishment of carbon-free energy sources.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/professionalBackground/selfEmployment",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"professionalBackground",
+								"selfEmployment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "professionalBackgroundNew",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"Pre-Apple era After graduating from Auburn University, he spent one year of being unemployed (travelling Europe). Afterwards, Cook spent 12 years in IBM's personal computer business, ultimately serving as the director of North American fulfillment.[18] During this time, Cook also earned his MBA from Duke University, becoming a Fuqua Scholar in 1988.[19] Later, he served as the chief operating officer of the computer reseller division of Intelligent Electronics.[20] In 1997, he became the vice president for corporate materials at Compaq for six months, but left the position after being hired by Steve Jobs.[21] Apple era Early career In 1998, Steve Jobs asked Cook to join Apple. In a commencement speech at Auburn University, Cook said he decided to join Apple after meeting Jobs: Any purely rational consideration of cost and benefits lined up in Compaq's favor, and the people who knew me best advised me to stay at Compaq... On that day in early 1998, I listened to my intuition, not the left side of my brain or for that matter even the people who knew me best... no more than five minutes into my initial interview with Steve, I wanted to throw caution and logic to the wind and join Apple. My intuition already knew that joining Apple was a once-in-a-lifetime opportunity to work for the creative genius and to be on the executive team that could resurrect a great American company.[22] His first position was senior vice president for worldwide operations.[23] Cook closed factories and warehouses, and replaced them with contract manufacturers; this resulted in a reduction of the company's inventory from months to days. Predicting its importance, his group had invested in long-term deals such as advance investment in flash memory since 2005. This guaranteed a stable supply of what became the iPod Nano, then iPhone and iPad. Competitors at Hewlett-Packard described their cancelled HP TouchPad tablet computer and later said that it was made from \\\"cast-off, reject iPad parts\\\".[24] Cook's actions were recognized for keeping costs under control, and combined with the rest of the company, generated huge profits.[25] Cook giving the keynote at the 2012 World Wide Developers Conference In January 2007, Cook was promoted to lead operations[26] and served as chief executive in 2009, while Jobs was away on a leave of absence for health-related issues. In January 2011, Apple's board of directors approved a third medical leave of absence requested by Jobs. During that time, Cook was responsible for most of Apple's day-to-day operations, while Jobs made most major decisions.[27][28] Apple chief executive (2011–present) After Jobs resigned as CEO and became chairman of the board, Cook was named the new chief executive officer of Apple Inc. on August 24, 2011.[29][30] Six weeks later, on October 5, 2011, Jobs died due to complications from pancreatic cancer.[31]. He also founded a company together with Elon Musk, located in Palo Alto, which pursues the establishment of carbon-free energy sources.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/professionalBackground/professionalBackgroundNew",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"professionalBackground",
+								"professionalBackgroundNew"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		}
 	]
 }
