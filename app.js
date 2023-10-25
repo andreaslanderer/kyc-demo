@@ -6,8 +6,10 @@ import {
     civilStatusPrompt,
     educationPrompt,
     employmentPrompt,
+    noChildrenPrompt,
     personalDetailsPrompt,
-    relationBetweenPartnersPrompt, selfEmploymentPrompt,
+    relationBetweenPartnersPrompt,
+    selfEmploymentPrompt,
     unemploymentPrompt
 } from './prompt.js'
 
@@ -25,9 +27,10 @@ app.set('json spaces', 2)
 app.options('*', cors())
 
 const familySituationPrompts = [
-    { information: "personalDetails", prompt: PromptTemplate.fromTemplate(personalDetailsPrompt) },
     { information: "civilStatus", prompt: PromptTemplate.fromTemplate(civilStatusPrompt) },
-    { information: "partnerRelations", prompt: PromptTemplate.fromTemplate(relationBetweenPartnersPrompt) }
+    { information: "personalDetails", prompt: PromptTemplate.fromTemplate(personalDetailsPrompt) },
+    { information: "partnerRelations", prompt: PromptTemplate.fromTemplate(relationBetweenPartnersPrompt) },
+    { information: "noOfChildren", prompt: PromptTemplate.fromTemplate(noChildrenPrompt) }
 ]
 
 const educationalBackgroundPrompt = [
