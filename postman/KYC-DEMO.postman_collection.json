@@ -7,33 +7,146 @@
 	},
 	"item": [
 		{
-			"name": "familySituationNew",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"text\": \"Paula Martinez is born 1.1.1989 in Buenos Aires, Germany. She is married to her husband Felicitas Anna. Their wedding was on 30.6.1970. They have two children: Carla, Monica and Hernan. Carla's sister's second name is Juana.\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "familySituation",
+			"item": [
+				{
+					"name": "familySituationNew",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"Paula Martinez is born 1.1.1989 in Buenos Aires, Germany. She is married to her husband Felicitas Anna. Their wedding was on 30.6.1970. They have two children: Carla, Monica and Hernan. Carla's sister's second name is Juana.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/familySituationNew",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"familySituationNew"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "{{URL}}/familySituationNew",
-					"host": [
-						"{{URL}}"
-					],
-					"path": [
-						"familySituationNew"
-					]
+				{
+					"name": "civilStatus",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"Paula Martinez is born 1.1.1989 in Buenos Aires, Germany. She is married to her husband Felicitas Anna. Their wedding was on 30.6.1970. They have two children: Carla, Monica and Hernan. Carla's sister's second name is Juana.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/familySituation/civilStatus",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"familySituation",
+								"civilStatus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "personalDetails",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"Paula Martinez is born 1.1.1989 in Buenos Aires, Germany. She is married to her husband Felicitas Anna. Their wedding was on 30.6.1970. They have two children: Carla, Monica and Hernan. Carla's sister's second name is Juana.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/familySituation/personalDetails",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"familySituation",
+								"personalDetails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "partnerRelations",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"Paula Martinez is born 1.1.1989 in Buenos Aires, Germany. She is married to her husband Felicitas Anna. Their wedding was on 30.6.1970. They have two children: Carla, Monica and Hernan. Carla's sister's second name is Juana.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/familySituation/partnerRelations",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"familySituation",
+								"partnerRelations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "noOfChildren",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"Paula Martinez is born 1.1.1989 in Buenos Aires, Germany. She is married to her husband Felicitas Anna. Their wedding was on 30.6.1970. They have two children: Carla, Monica and Hernan. Carla's sister's second name is Juana.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/familySituation/noOfChildren",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"familySituation",
+								"noOfChildren"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "professionalBackgroundNew",
+			"name": "educationalBackgroundNew",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -47,12 +160,38 @@
 					}
 				},
 				"url": {
-					"raw": "{{URL}}/professionalBackgroundNew",
+					"raw": "{{URL}}/educationalBackgroundNew",
 					"host": [
 						"{{URL}}"
 					],
 					"path": [
-						"professionalBackgroundNew"
+						"educationalBackgroundNew"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "employmentBackgroundNew",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"text\": \"Pre-Apple era After graduating from Auburn University, he spent one year of being unemployed (travelling Europe). Afterwards, Cook spent 12 years in IBM's personal computer business, ultimately serving as the director of North American fulfillment.[18] During this time, Cook also earned his MBA from Duke University, becoming a Fuqua Scholar in 1988.[19] Later, he served as the chief operating officer of the computer reseller division of Intelligent Electronics.[20] In 1997, he became the vice president for corporate materials at Compaq for six months, but left the position after being hired by Steve Jobs.[21] Apple era Early career In 1998, Steve Jobs asked Cook to join Apple. In a commencement speech at Auburn University, Cook said he decided to join Apple after meeting Jobs: Any purely rational consideration of cost and benefits lined up in Compaq's favor, and the people who knew me best advised me to stay at Compaq... On that day in early 1998, I listened to my intuition, not the left side of my brain or for that matter even the people who knew me best... no more than five minutes into my initial interview with Steve, I wanted to throw caution and logic to the wind and join Apple. My intuition already knew that joining Apple was a once-in-a-lifetime opportunity to work for the creative genius and to be on the executive team that could resurrect a great American company.[22] His first position was senior vice president for worldwide operations.[23] Cook closed factories and warehouses, and replaced them with contract manufacturers; this resulted in a reduction of the company's inventory from months to days. Predicting its importance, his group had invested in long-term deals such as advance investment in flash memory since 2005. This guaranteed a stable supply of what became the iPod Nano, then iPhone and iPad. Competitors at Hewlett-Packard described their cancelled HP TouchPad tablet computer and later said that it was made from \\\"cast-off, reject iPad parts\\\".[24] Cook's actions were recognized for keeping costs under control, and combined with the rest of the company, generated huge profits.[25] Cook giving the keynote at the 2012 World Wide Developers Conference In January 2007, Cook was promoted to lead operations[26] and served as chief executive in 2009, while Jobs was away on a leave of absence for health-related issues. In January 2011, Apple's board of directors approved a third medical leave of absence requested by Jobs. During that time, Cook was responsible for most of Apple's day-to-day operations, while Jobs made most major decisions.[27][28] Apple chief executive (2011–present) After Jobs resigned as CEO and became chairman of the board, Cook was named the new chief executive officer of Apple Inc. on August 24, 2011.[29][30] Six weeks later, on October 5, 2011, Jobs died due to complications from pancreatic cancer.[31]. He also founded a company together with Elon Musk, located in Palo Alto, which pursues the establishment of carbon-free energy sources.\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/employmentBackgroundNew",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"employmentBackgroundNew"
 					]
 				}
 			},
