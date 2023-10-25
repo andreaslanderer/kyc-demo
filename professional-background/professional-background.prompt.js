@@ -1,5 +1,3 @@
-
-
 const educationPrompt = `
 **Instruction**: 
 - You will receive background data.
@@ -47,7 +45,6 @@ Your output might be:
 
 --- End Background --- 
 `
-
 const employmentPrompt = `
     **Instruction**: 
     - You will receive background data.
@@ -113,7 +110,6 @@ const employmentPrompt = `
     
     --- End Background --- 
 `
-
 const unemploymentPrompt = `
     **Instruction**: 
     - You will be provided with background data.
@@ -158,7 +154,6 @@ const unemploymentPrompt = `
     
     --- End Background --- 
 `
-
 const selfEmploymentPrompt = `
     **Instruction**: 
     - You will receive background data.
@@ -218,7 +213,6 @@ const selfEmploymentPrompt = `
     
     --- End Background --- 
 `
-
 export {
     educationPrompt,
     employmentPrompt,
