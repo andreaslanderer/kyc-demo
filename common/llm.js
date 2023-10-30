@@ -1,4 +1,5 @@
 import {OpenAI} from "langchain/llms/openai";
+import {search} from "./vector-store.js";
 
 const apiKeyOpenAI = process.env.OPENAI_API_KEY
 
@@ -12,14 +13,23 @@ const llm = new OpenAI({
 // Define a regular expression pattern to match JSON objects
 const jsonPattern = /{(?:[^{}]|{(?:[^{}]|{[^{}]*})*})*}/;
 
+
 async function prompt(req, res, promptGroupName, promptGroup) {
     console.log(`Calling ${promptGroupName} endpoint`)
     const {text} = req.body
+    await promptWithBackground(text, res, promptGroupName, promptGroup);
+}
 
+async function promptWithBackground(partnerId, res, promptGroupName, promptGroup) {
     try {
         const promises = promptGroup.map(async p => {
+
+            console.log(`Calling cognitive search`, p.information)
+            const background = await getBackground(partnerId, p.question, p.entries);
+            console.log(`Cognitive search returned successfully with background information`, p.information)
+
             const formattedPrompt = await p.prompt.format({
-                background: text
+                background
             })
             console.log('Calling OpenAI service', p.information)
             const result = await getCompletion(formattedPrompt)
@@ -52,10 +62,18 @@ async function prompt(req, res, promptGroupName, promptGroup) {
     }
 }
 
+async function getBackground(partnerId, question, entries) {
+    const documents = await search(partnerId, question, entries)
+    return documents
+        .map(d => d.content)
+        .reduce((accumulator, currentValue) => `${currentValue}${accumulator}\n`, '')
+}
+
 async function getCompletion(prompt) {
     return await llm.predict(prompt);
 }
 
 export {
-    prompt
+    prompt,
+    promptWithBackground
 }

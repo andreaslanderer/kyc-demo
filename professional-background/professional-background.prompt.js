@@ -96,7 +96,7 @@ const employmentPrompt = `
                     "profit": "Profit with currency"
                 }},
                 "startDate": "Start date in yyyy-mm-dd format",
-                "endDate": "End date in yyyy-mm-dd format, if applicable",
+                "endDate": "End date in yyyy-mm-dd format",
                 "additionalInformation": "Additional details or missing information about the employment",
                 "reasoning": "Your basis for the provided information"
             }}
