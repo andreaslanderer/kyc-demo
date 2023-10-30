@@ -7,6 +7,7 @@ import {
     selfEmploymentPrompt,
     unemploymentPrompt
 } from "./professional-background.prompt.js"
+import {cacheMiddleware} from "../common/caching.js";
 
 const router = express.Router()
 
@@ -41,7 +42,7 @@ const professionalBackgroundPrompt = [
     unemployment,
 ]
 
-router.post('/professionalBackground/professionalBackgroundNew', async (req, res) => {
+router.post('/professionalBackground/professionalBackgroundNew', cacheMiddleware(5), async (req, res) => {
     const { partnerId } = req.body
     if (partnerId) {
         await promptWithBackground(partnerId, res, 'education', [education, employment, selfEmployment, unemployment]);
@@ -52,19 +53,19 @@ router.post('/professionalBackground/professionalBackgroundNew', async (req, res
     }
 })
 
-router.post('/professionalBackground/education', async (req, res) => {
+router.post('/professionalBackground/education', cacheMiddleware(5), async (req, res) => {
     await prompt(req, res, 'education', [education]);
 })
 
-router.post('/professionalBackground/employment', async (req, res) => {
+router.post('/professionalBackground/employment', cacheMiddleware(5), async (req, res) => {
     await prompt(req, res, 'employment', [employment]);
 })
 
-router.post('/professionalBackground/unemployment', async (req, res) => {
+router.post('/professionalBackground/unemployment', cacheMiddleware(5), async (req, res) => {
     await prompt(req, res, 'unemployment', [unemployment]);
 })
 
-router.post('/professionalBackground/selfEmployment', async (req, res) => {
+router.post('/professionalBackground/selfEmployment', cacheMiddleware(5), async (req, res) => {
     await prompt(req, res, 'selfEmployment', [selfEmployment]);
 })
 
