@@ -123,7 +123,7 @@ const unemploymentPrompt = `
     Your output should be:
     \`\`\`
     {{
-        "unemployment": [
+        "unemploymentPeriods": [
             {{
                 "details": "After graduation and before first job",
                 "startDate": "2010",
@@ -137,7 +137,7 @@ const unemploymentPrompt = `
     **Expected Output Structure**: 
     \`\`\`
     {{
-        "unemployment": [
+        "unemploymentPeriods": [
             {{
                 "details": "Description of the unemployment phase",
                 "startDate": "start date in yyyy-mm format",
@@ -167,13 +167,13 @@ const selfEmploymentPrompt = `
     Your output might be:
     \`\`\`
     {{
-        "selfEmployment": [
+        "selfEmployments": [
             {{
                 "companyName": "GreenTech",
                 "industry": "Renewable energy",
                 ...
                 "startDate": "2008-01-01",
-                "countries": ["USA"],
+                "countries": ["US"],
                 "reasoning": "Mike founded GreenTech in 2008, a renewable energy company in the USA."
             }}
         ]
@@ -183,12 +183,12 @@ const selfEmploymentPrompt = `
     **Expected Output Structure**: 
     \`\`\`
     {{
-        "selfEmployment": [
+        "selfEmployments": [
             {{
                 "companyName": "Name of the company",
                 "registeredAddress": "Company's registered address",
-                "countries": ["List of countries where the company operates"],
-                "geographicalRegion": ["List of regions where the company operates"],
+                "countries": ["List of countries where the company operates (ISO-2-Letter-code)"],
+                "geographicalRegions": ["List of regions where the company operates"],
                 "ownership": "Specific details about ownership structure",
                 "businessPartners": ["List of business partners involved with the company"],
                 "industry": "Company's line of business",
