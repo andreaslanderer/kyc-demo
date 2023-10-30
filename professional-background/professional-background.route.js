@@ -1,5 +1,5 @@
 import express from 'express'
-import { prompt } from "../common/llm.js"
+import {prompt, promptWithBackground} from "../common/llm.js"
 import {PromptTemplate} from "langchain/prompts"
 import {
     educationPrompt,
@@ -10,8 +10,18 @@ import {
 
 const router = express.Router()
 
-const education = { information: "education", prompt: PromptTemplate.fromTemplate(educationPrompt) }
-const employment = { information: "employment", prompt: PromptTemplate.fromTemplate(employmentPrompt) }
+const education = {
+    information: "education",
+    prompt: PromptTemplate.fromTemplate(educationPrompt),
+    question: `What schools/universities did he attend?`,
+    entries: 5
+}
+const employment = {
+    information: "employment",
+    prompt: PromptTemplate.fromTemplate(employmentPrompt) ,
+    question: `What employment relationship was he in?"`,
+    entries: 10
+}
 const selfEmployment = { information: "selfEmployment", prompt: PromptTemplate.fromTemplate(selfEmploymentPrompt) }
 const unemployment = { information: "unemployment", prompt: PromptTemplate.fromTemplate(unemploymentPrompt) }
 const professionalBackgroundPrompt = [
@@ -22,7 +32,14 @@ const professionalBackgroundPrompt = [
 ]
 
 router.post('/professionalBackground/professionalBackgroundNew', async (req, res) => {
-    await prompt(req, res, 'education', professionalBackgroundPrompt);
+    const { partnerId } = req.body
+    if (partnerId) {
+        await promptWithBackground(partnerId, res, 'education', [education, employment]);
+    } else {
+        res.status(400).json({
+            "message": "Missing property: partnerId"
+        })
+    }
 })
 
 router.post('/professionalBackground/education', async (req, res) => {
