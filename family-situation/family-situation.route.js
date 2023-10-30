@@ -9,6 +9,7 @@ import {
     personalDetailsPrompt,
     relationBetweenPartnersPrompt
 } from "./family-situation.prompt.js";
+import {cacheMiddleware} from "../common/caching.js";
 
 const router = express.Router()
 
@@ -35,23 +36,23 @@ const familySituationPrompts = [
     noOfChildren
 ]
 
-router.post('/familySituationNew', async (req, res) => {
+router.post('/familySituationNew', cacheMiddleware(5), async (req, res) => {
     await prompt(req, res, 'familySituation', familySituationPrompts);
 })
 
-router.post('/familySituation/civilStatus', async (req, res) => {
+router.post('/familySituation/civilStatus', cacheMiddleware(5), async (req, res) => {
     await prompt(req, res, 'civilStatus', [civilStatus]);
 })
 
-router.post('/familySituation/personalDetails', async (req, res) => {
+router.post('/familySituation/personalDetails', cacheMiddleware(5), async (req, res) => {
     await prompt(req, res, 'personalDetails', [personalDetails]);
 })
 
-router.post('/familySituation/partnerRelations', async (req, res) => {
+router.post('/familySituation/partnerRelations', cacheMiddleware(5), async (req, res) => {
     await prompt(req, res, 'partnerRelations', [partnerRelations]);
 })
 
-router.post('/familySituation/noOfChildren', async (req, res) => {
+router.post('/familySituation/noOfChildren', cacheMiddleware(5), async (req, res) => {
     await prompt(req, res, 'noOfChildren', [noOfChildren]);
 })
 
