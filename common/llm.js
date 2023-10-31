@@ -70,10 +70,12 @@ async function promptWithBackground(partnerId, res, promptGroupName, promptGroup
 
             const match = result.match(jsonPattern);
             if (match && match.length > 0) {
-                return {
+                const returnObject = {
                     prop: p.information,
                     value: JSON.parse(match[0])
                 }
+                returnObject.value['background'] = background
+                return returnObject
             } else {
                 console.log('No response JSON found, therefore returning an empty object', p.information)
                 return {
