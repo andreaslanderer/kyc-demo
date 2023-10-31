@@ -1,5 +1,5 @@
 import express from 'express'
-import {prompt, promptWithBackground} from "../common/llm.js"
+import {promptWithBackground} from "../common/llm.js"
 import {PromptTemplate} from "langchain/prompts"
 import {
     educationPrompt,
@@ -35,39 +35,37 @@ const unemployment = {
     question: `Was the person unemployed?`,
     entries: 5
 }
-const professionalBackgroundPrompt = [
-    education,
-    employment,
-    selfEmployment,
-    unemployment,
-]
 
-router.post('/professionalBackground/professionalBackgroundNew', cacheMiddleware(5), async (req, res) => {
-    const { partnerId } = req.body
+router.post('/professionalBackground/professionalBackgroundNew', cacheMiddleware(30), async (req, res) => {
+    await process(req, res, [education, employment, selfEmployment, unemployment], 'professionalBackground')
+})
+
+router.post('/professionalBackground/education', cacheMiddleware(30), async (req, res) => {
+    await process(req, res, [education], 'education')
+})
+
+router.post('/professionalBackground/employment', cacheMiddleware(30), async (req, res) => {
+    await process(req, res, [employment], 'employment')
+})
+
+router.post('/professionalBackground/unemployment', cacheMiddleware(30), async (req, res) => {
+    await process(req, res, [unemployment], 'unemployment')
+})
+
+router.post('/professionalBackground/selfEmployment', cacheMiddleware(30), async (req, res) => {
+    await process(req, res, [selfEmployment], 'selfEmployment')
+})
+
+async function process(req, res, promptGroup, endpointName) {
+    const {partnerId} = req.body
     if (partnerId) {
-        await promptWithBackground(partnerId, res, 'education', [education, employment, selfEmployment, unemployment]);
+        await promptWithBackground(partnerId, res, endpointName, promptGroup)
     } else {
         res.status(400).json({
             "message": "Missing property: partnerId"
         })
     }
-})
-
-router.post('/professionalBackground/education', cacheMiddleware(5), async (req, res) => {
-    await prompt(req, res, 'education', [education]);
-})
-
-router.post('/professionalBackground/employment', cacheMiddleware(5), async (req, res) => {
-    await prompt(req, res, 'employment', [employment]);
-})
-
-router.post('/professionalBackground/unemployment', cacheMiddleware(5), async (req, res) => {
-    await prompt(req, res, 'unemployment', [unemployment]);
-})
-
-router.post('/professionalBackground/selfEmployment', cacheMiddleware(5), async (req, res) => {
-    await prompt(req, res, 'selfEmployment', [selfEmployment]);
-})
+}
 
 export {
     router

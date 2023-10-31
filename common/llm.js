@@ -14,10 +14,43 @@ const llm = new OpenAI({
 const jsonPattern = /{(?:[^{}]|{(?:[^{}]|{[^{}]*})*})*}/;
 
 
-async function prompt(req, res, promptGroupName, promptGroup) {
+async function prompt(text, res, promptGroupName, promptGroup) {
     console.log(`Calling ${promptGroupName} endpoint`)
-    const {text} = req.body
-    await promptWithBackground(text, res, promptGroupName, promptGroup);
+
+    try {
+        const promises = promptGroup.map(async p => {
+            const formattedPrompt = await p.prompt.format({
+                background: text
+            })
+            console.log('Calling OpenAI service', p.information)
+            const result = await getCompletion(formattedPrompt)
+            console.log(`OpenAI service call returned successfully with result`, p.information)
+
+            const match = result.match(jsonPattern);
+            if (match && match.length > 0) {
+                return {
+                    prop: p.information,
+                    value: JSON.parse(match[0])
+                }
+            } else {
+                console.log('No response JSON found, therefore returning an empty object', p.information)
+                return {
+                    prop: p.information,
+                    value: {}
+                }
+            }
+        })
+
+        const resultsArray = await Promise.all(promises)
+        const results = {}
+        resultsArray.forEach(r => results[r.prop] = r.value)
+
+        console.log(`Finished calling ${promptGroupName} endpoint`)
+        res.send(results)
+    } catch (e) {
+        console.error(`Error while calling ${promptGroupName} endpoint`, e)
+        res.status(500).send(e)
+    }
 }
 
 async function promptWithBackground(partnerId, res, promptGroupName, promptGroup) {

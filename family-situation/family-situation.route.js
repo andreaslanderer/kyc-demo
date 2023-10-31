@@ -1,8 +1,7 @@
-
 import express from 'express'
 import {PromptTemplate} from "langchain/prompts";
 
-import { prompt } from "../common/llm.js";
+import {prompt} from "../common/llm.js";
 import {
     civilStatusPrompt,
     noChildrenPrompt,
@@ -36,24 +35,35 @@ const familySituationPrompts = [
     noOfChildren
 ]
 
-router.post('/familySituationNew', cacheMiddleware(5), async (req, res) => {
-    await prompt(req, res, 'familySituation', familySituationPrompts);
+router.post('/familySituationNew', cacheMiddleware(30), async (req, res) => {
+    await process(req, res, 'familySituation', familySituationPrompts)
 })
 
-router.post('/familySituation/civilStatus', cacheMiddleware(5), async (req, res) => {
-    await prompt(req, res, 'civilStatus', [civilStatus]);
+router.post('/familySituation/civilStatus', cacheMiddleware(30), async (req, res) => {
+    await process(req, res, 'civilStatus', [civilStatus])
 })
 
-router.post('/familySituation/personalDetails', cacheMiddleware(5), async (req, res) => {
-    await prompt(req, res, 'personalDetails', [personalDetails]);
+router.post('/familySituation/personalDetails', cacheMiddleware(30), async (req, res) => {
+    await process(req, res, 'personalDetails', [personalDetails])
 })
 
-router.post('/familySituation/partnerRelations', cacheMiddleware(5), async (req, res) => {
-    await prompt(req, res, 'partnerRelations', [partnerRelations]);
+router.post('/familySituation/partnerRelations', cacheMiddleware(30), async (req, res) => {
+    await process(req, res, 'partnerRelations', [partnerRelations])
 })
 
-router.post('/familySituation/noOfChildren', cacheMiddleware(5), async (req, res) => {
-    await prompt(req, res, 'noOfChildren', [noOfChildren]);
+router.post('/familySituation/noOfChildren', cacheMiddleware(30), async (req, res) => {
+    await process(req, res, 'noOfChildren', [noOfChildren])
 })
+
+async function process(req, res, endpointName, promptGroup) {
+    const {text} = req.body
+    if (text) {
+        await prompt(text, res, endpointName, promptGroup);
+    } else {
+        res.status(400).json({
+            "message": "Missing property: text"
+        })
+    }
+}
 
 export { router }
