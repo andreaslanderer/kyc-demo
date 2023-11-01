@@ -12,7 +12,9 @@ function cacheMiddleware(durationInMinutes) {
         } else {
             res.sendResponse = res.send;
             res.send = (body) => {
-                cache.put(key, body, durationInMinutes * 1000 * 60);
+                if (res.statusCode >= 200 && res.statusCode < 300) {
+                    cache.put(key, body, durationInMinutes * 1000 * 60);
+                }
                 res.sendResponse(body);
             };
             next();

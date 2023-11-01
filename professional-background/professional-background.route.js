@@ -36,23 +36,23 @@ const unemployment = {
     entries: 5
 }
 
-router.post('/professionalBackground/professionalBackgroundNew', cacheMiddleware(30), async (req, res) => {
+router.post('/professionalBackground/professionalBackgroundNew', cacheMiddleware(5), async (req, res) => {
     await process(req, res, [education, employment, selfEmployment, unemployment], 'professionalBackground')
 })
 
-router.post('/professionalBackground/education', cacheMiddleware(30), async (req, res) => {
+router.post('/professionalBackground/education', cacheMiddleware(5), async (req, res) => {
     await process(req, res, [education], 'education')
 })
 
-router.post('/professionalBackground/employment', cacheMiddleware(30), async (req, res) => {
+router.post('/professionalBackground/employment', cacheMiddleware(5), async (req, res) => {
     await process(req, res, [employment], 'employment')
 })
 
-router.post('/professionalBackground/unemployment', cacheMiddleware(30), async (req, res) => {
+router.post('/professionalBackground/unemployment', cacheMiddleware(5), async (req, res) => {
     await process(req, res, [unemployment], 'unemployment')
 })
 
-router.post('/professionalBackground/selfEmployment', cacheMiddleware(30), async (req, res) => {
+router.post('/professionalBackground/selfEmployment', cacheMiddleware(5), async (req, res) => {
     await process(req, res, [selfEmployment], 'selfEmployment')
 })
 
