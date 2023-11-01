@@ -23,8 +23,11 @@ npm i
 Before you can run the service, you need to set the following environment variables:
 
 ```shell
-export OPENAI_API_KEY=<your-api-key>
-echo $OPENAI_API_KEY
+export SEARCH_ENDPOINT=<url>
+echo $SEARCH_ENDPOINT
+
+export COMPLETION_ENDPOINT=<url>
+echo $COMPLETION_ENDPOINT
 ```
 
 Afterwards, you can run the software

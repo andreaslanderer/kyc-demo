@@ -163,17 +163,25 @@ const selfEmploymentPrompt = `
     - **Avoid assumptions**. If certain details like exact dates or names are absent, leave them blank.
     
     **Example**: 
-    If the background data says: "Mike founded GreenTech in 2008, a renewable energy company in the USA."
+    If the background data says: "Mike founded GreenTech in 2008, a renewable energy company in the USA. The company
+    is located in GreenTech Street 1000a, Palo Alto"
     Your output might be:
     \`\`\`
     {{
         "selfEmployments": [
             {{
                 "companyName": "GreenTech",
-                "industry": "Renewable energy",
-                ...
-                "startDate": "2008-01-01",
+                "registeredAddress": "GreenTech Street 1000a, Palo Alto",
                 "countries": ["US"],
+                "geographicalRegions": ["North America"],
+                "ownership": "Mike was the sole founder",
+                "businessPartners": [],
+                "industry": "Renewable energy",
+                "sizeOfCompany": {{}},
+                "businessBackground": "",
+                "startDate": "2008-01-01",
+                "endDate": "",
+                "additionalInformation": "",
                 "reasoning": "Mike founded GreenTech in 2008, a renewable energy company in the USA."
             }}
         ]

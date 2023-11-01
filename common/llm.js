@@ -1,14 +1,5 @@
-import {OpenAI} from "langchain/llms/openai";
 import {search} from "./vector-store.js";
-
-const apiKeyOpenAI = process.env.OPENAI_API_KEY
-
-const llm = new OpenAI({
-    // modelName: 'gpt-3.5-turbo-16k-0613',
-    modelName: 'gpt-4',
-    temperature: 0,
-    openAIApiKey: apiKeyOpenAI
-});
+import axios from "axios";
 
 // Define a regular expression pattern to match JSON objects
 const jsonPattern = /{(?:[^{}]|{(?:[^{}]|{[^{}]*})*})*}/;
@@ -105,7 +96,14 @@ async function getBackground(partnerId, question, entries) {
 }
 
 async function getCompletion(prompt) {
-    return await llm.predict(prompt);
+    const response = await axios.post(process.env.COMPLETION_ENDPOINT, {
+        "model": "gpt4_0613_8k",
+        "prompt": prompt,
+        "stop": [],
+        "temperature": 0,
+        "max_tokens": 4000
+    })
+    return response.data.completion
 }
 
 export {

@@ -35,23 +35,23 @@ const familySituationPrompts = [
     noOfChildren
 ]
 
-router.post('/familySituationNew', cacheMiddleware(30), async (req, res) => {
+router.post('/familySituationNew', cacheMiddleware(5), async (req, res) => {
     await process(req, res, 'familySituation', familySituationPrompts)
 })
 
-router.post('/familySituation/civilStatus', cacheMiddleware(30), async (req, res) => {
+router.post('/familySituation/civilStatus', cacheMiddleware(5), async (req, res) => {
     await process(req, res, 'civilStatus', [civilStatus])
 })
 
-router.post('/familySituation/personalDetails', cacheMiddleware(30), async (req, res) => {
+router.post('/familySituation/personalDetails', cacheMiddleware(5), async (req, res) => {
     await process(req, res, 'personalDetails', [personalDetails])
 })
 
-router.post('/familySituation/partnerRelations', cacheMiddleware(30), async (req, res) => {
+router.post('/familySituation/partnerRelations', cacheMiddleware(5), async (req, res) => {
     await process(req, res, 'partnerRelations', [partnerRelations])
 })
 
-router.post('/familySituation/noOfChildren', cacheMiddleware(30), async (req, res) => {
+router.post('/familySituation/noOfChildren', cacheMiddleware(5), async (req, res) => {
     await process(req, res, 'noOfChildren', [noOfChildren])
 })
 
