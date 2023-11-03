@@ -21,5 +21,10 @@ jobs:
       - name: Install Node.js dependencies
         run: npm install
 
+      - name: Prepare app.yaml
+        run: |
+          sed -i "s/SEARCH_ENDPOINT_PLACEHOLDER/${{ secrets.SEARCH_ENDPOINT }}/g" app.yaml
+          sed -i "s/COMPLETION_ENDPOINT_PLACEHOLDER/${{ secrets.COMPLETION_ENDPOINT }}/g" app.yaml
+
       - name: Deploy to Google App Engine
-        run: gcloud app deploy app.yaml --project your-project-id --quiet --set-env-vars SEARCH_ENDPOINT=${{ secrets.SEARCH_ENDPOINT }},COMPLETION_ENDPOINT=${{ secrets.COMPLETION_ENDPOINT }}
+        run: gcloud app deploy app.yaml --project your-project-id
