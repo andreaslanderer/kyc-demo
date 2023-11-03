@@ -2,7 +2,7 @@ import {search} from "./vector-store.js";
 import axios from "axios";
 
 // Define a regular expression pattern to match JSON objects
-const jsonPattern = /{(?:[^{}]|{(?:[^{}]|{[^{}]*})*})*}/;
+const jsonRegEx = /{(?:[^{}]|{(?:[^{}]|{[^{}]*})*})*}/;
 
 
 async function prompt(text, res, promptGroupName, promptGroup) {
@@ -17,7 +17,7 @@ async function prompt(text, res, promptGroupName, promptGroup) {
             const result = await getCompletion(formattedPrompt)
             console.log(`OpenAI service call returned successfully with result`, p.information)
 
-            const match = result.match(jsonPattern);
+            const match = result.match(jsonRegEx);
             if (match && match.length > 0) {
                 return {
                     prop: p.information,
@@ -59,7 +59,7 @@ async function promptWithBackground(partnerId, res, promptGroupName, promptGroup
             const result = await getCompletion(formattedPrompt)
             console.log(`OpenAI service call returned successfully with result`, p.information)
 
-            const match = result.match(jsonPattern);
+            const match = result.match(jsonRegEx);
             if (match && match.length > 0) {
                 const returnObject = {
                     prop: p.information,
