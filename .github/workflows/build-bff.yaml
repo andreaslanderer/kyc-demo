@@ -1,0 +1,25 @@
+name: Deploy to Google App Engine
+
+on:
+  push:
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+        with:
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+
+      - name: Install Node.js dependencies
+        run: npm install
+
+      - name: Deploy to Google App Engine
+        run: gcloud app deploy app.yaml --project your-project-id --quiet --set-env-vars SEARCH_ENDPOINT=${{ secrets.SEARCH_ENDPOINT }},COMPLETION_ENDPOINT=${{ secrets.COMPLETION_ENDPOINT }}
