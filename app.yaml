@@ -13,8 +13,6 @@
 
 # [START app_yaml]
 runtime: nodejs18
-includes:
-  - env_variables.yaml
 env_variables:
   SEARCH_ENDPOINT: "SEARCH_ENDPOINT_PLACEHOLDER"
   COMPLETION_ENDPOINT: "COMPLETION_ENDPOINT_PLACEHOLDER"
