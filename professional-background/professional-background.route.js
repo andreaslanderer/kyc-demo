@@ -15,7 +15,7 @@ const education = {
     information: "education",
     prompt: PromptTemplate.fromTemplate(educationPrompt),
     question: `What schools/universities did the person attend?`,
-    entries: 5
+    entries: 10
 }
 const employment = {
     information: "employment",
@@ -27,13 +27,13 @@ const selfEmployment = {
     information: "selfEmployment",
     prompt: PromptTemplate.fromTemplate(selfEmploymentPrompt),
     question: `Which companies has the person founded or owned?"`,
-    entries: 5
+    entries: 10
 }
 const unemployment = {
     information: "unemployment",
     prompt: PromptTemplate.fromTemplate(unemploymentPrompt),
     question: `Was the person unemployed?`,
-    entries: 5
+    entries: 10
 }
 
 router.post('/professionalBackground/professionalBackgroundNew', cacheMiddleware(5), async (req, res) => {
