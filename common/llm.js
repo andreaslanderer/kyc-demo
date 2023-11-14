@@ -1,5 +1,6 @@
 import {search} from "./vector-store.js";
 import axios from "axios";
+import {COMPLETION_ENDPOINT} from "./endpoints.js";
 
 // Define a regular expression pattern to match JSON objects
 const jsonRegEx = /{(?:[^{}]|{(?:[^{}]|{[^{}]*})*})*}/;
@@ -96,7 +97,7 @@ async function getBackground(partnerId, question, entries) {
 }
 
 async function getCompletion(prompt) {
-    const response = await axios.post(process.env.COMPLETION_ENDPOINT, {
+    const response = await axios.post(COMPLETION_ENDPOINT, {
         "model": "gpt4_0613_8k",
         "prompt": prompt,
         "stop": [],

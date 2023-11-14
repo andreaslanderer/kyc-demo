@@ -28,6 +28,9 @@ echo $SEARCH_ENDPOINT
 
 export COMPLETION_ENDPOINT=<url>
 echo $COMPLETION_ENDPOINT
+
+export EMBEDDING_ENDPOINT=<url>
+echo $EMBEDDING_ENDPOINT
 ```
 
 Afterwards, you can run the software
