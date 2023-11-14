@@ -28,6 +28,7 @@ jobs:
         run: |
           sed -i "s|SEARCH_ENDPOINT_PLACEHOLDER|${{ secrets.SEARCH_ENDPOINT }}|g" app.yaml
           sed -i "s|COMPLETION_ENDPOINT_PLACEHOLDER|${{ secrets.COMPLETION_ENDPOINT }}|g" app.yaml
+          sed -i "s|EMBEDDING_ENDPOINT_ENDPOINT_PLACEHOLDER|${{ secrets.EMBEDDING_ENDPOINT }}|g" app.yaml
 
       - name: Deploy to Google App Engine
         run: gcloud app deploy app.yaml --project silent-relic-393813
