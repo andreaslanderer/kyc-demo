@@ -37,6 +37,91 @@ const sourceOfFundsPrompt = `
 {background}
 
 --- End Background --- 
-`;
+`
+const incomeFromBusinessActivitiesPrompt = `
+**Instruction**:
+- Analyze the provided background data.
+- Extract details about income from business activities.
+- Your response should be structured as shown below.
 
-export { sourceOfFundsPrompt };
+**Example**:
+Background: "John's tech startup had a significant breakthrough this year, earning a profit of 500,000 CHF."
+Your output might be:
+\`\`\`
+{
+    "incomeFromBusinessActivities"
+:
+    [
+        {
+            "description": "Profit from tech startup",
+            "amountChf": 500000
+        }
+    ]
+}
+\`\`\`
+
+**Expected Output Structure**:
+\`\`\`
+{
+    "incomeFromBusinessActivities": [
+        {
+            "description": "Description of the income source",
+            "amountChf": "Numeric value (decimal) indicating the amount"
+        }
+    ]
+}
+\`\`\`
+
+--- Begin Background ---
+
+{background}
+
+--- End Background ---
+`
+const incomeFromRealEstateSalesPrompt = `
+**Instruction**:
+- Analyze the provided background data.
+- Identify and extract details about income from the sale of real estate.
+- Use the structure provided below for your response.
+
+**Example**:
+Background: "Mary sold her villa in Zürich last June for 1.2 million CHF."
+Your output might be:
+\`\`\`
+{
+    "incomeFromRealEstateSales"
+:
+    [
+        {
+            "propertyDescription": "Villa in Zürich",
+            "saleDate": "2021-06-15",
+            "saleAmountChf": 1200000
+        }
+    ]
+}
+\`\`\`
+
+**Expected Output Structure**:
+\`\`\`
+{
+    "incomeFromRealEstateSales": [
+        {
+            "propertyDescription": "Description of the property sold",
+            "saleDate": "Date of sale (yyyy-mm-dd)",
+            "saleAmountChf": "Sale amount in CHF (numeric value)"
+        }
+    ]
+}
+\`\`\`
+
+--- Begin Background ---
+
+{background}
+
+--- End Background ---
+`
+export {
+    sourceOfFundsPrompt,
+    incomeFromRealEstateSalesPrompt,
+    incomeFromBusinessActivitiesPrompt
+}
