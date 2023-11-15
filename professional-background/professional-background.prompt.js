@@ -51,6 +51,7 @@ const employmentPrompt = `
     - Determine the current and previous employments of the person based on this data.
     - Include employments where the person was an **employee** or held a **leading position** like CEO.
     - Your output should match the structure provided below.
+    - **Exclude** roles that signify ownership or founding of a company
     - **Avoid assumptions**. If any details like exact dates or names are missing, leave them blank.
     
     **Example**: 
