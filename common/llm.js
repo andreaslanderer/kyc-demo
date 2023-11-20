@@ -1,6 +1,6 @@
 import {search} from "./vector-store.js";
-import axios from "axios";
 import {COMPLETION_ENDPOINT} from "./endpoints.js";
+import {post} from "./http-client.js";
 
 // Define a regular expression pattern to match JSON objects
 const jsonRegEx = /{(?:[^{}]|{(?:[^{}]|{[^{}]*})*})*}/;
@@ -104,12 +104,7 @@ async function getCompletion(prompt) {
         "temperature": 0,
         "max_tokens": 4000
     }
-    const config = {
-        headers: {
-            "x-functions-key": process.env.FUNCTIONS_KEY
-        }
-    }
-    const response = await axios.post(COMPLETION_ENDPOINT, data, config)
+    const response = await post(COMPLETION_ENDPOINT, data)
     return response.data.completion
 }
 
