@@ -31,6 +31,10 @@ echo $COMPLETION_ENDPOINT
 
 export EMBEDDING_ENDPOINT=<url>
 echo $EMBEDDING_ENDPOINT
+
+export FUNCTIONS_KEY=<your-key>
+echo $FUNCTIONS_KEY 
+
 ```
 
 Afterwards, you can run the software

@@ -97,13 +97,19 @@ async function getBackground(partnerId, question, entries) {
 }
 
 async function getCompletion(prompt) {
-    const response = await axios.post(COMPLETION_ENDPOINT, {
+    const data = {
         "model": "gpt4_0613_8k",
         "prompt": prompt,
         "stop": [],
         "temperature": 0,
         "max_tokens": 4000
-    })
+    }
+    const config = {
+        headers: {
+            "x-functions-key": process.env.FUNCTIONS_KEY
+        }
+    }
+    const response = await axios.post(COMPLETION_ENDPOINT, data, config)
     return response.data.completion
 }
 
