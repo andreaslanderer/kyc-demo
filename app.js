@@ -1,5 +1,6 @@
 import express from 'express'
 import cors from 'cors'
+import { router as assetsAndLiabilitiesRouter } from './assets-and-liabilities/assets-and-liabilities.route.js'
 import { router as createEmbeddingsRouter } from './create-embeddings/create-embeddings.route.js'
 import { router as familySituationRouter } from './family-situation/family-situation.route.js'
 import { router as professionalBackgroundRouter } from './professional-background/professional-background.route.js'
@@ -11,6 +12,7 @@ const port = process.env.PORT || 3000
 
 app.use(express.json())
 app.use(cors())
+app.use(assetsAndLiabilitiesRouter)
 app.use(createEmbeddingsRouter)
 app.use(familySituationRouter)
 app.use(professionalBackgroundRouter)
