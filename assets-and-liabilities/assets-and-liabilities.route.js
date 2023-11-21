@@ -1,5 +1,5 @@
 import express from 'express'
-import {prompt} from "../common/llm.js";
+import {prompt, promptWithBackground} from "../common/llm.js";
 import {PromptTemplate} from "langchain/prompts";
 import {liquidityPrompt} from "./assets-and-liabilities.prompt.js";
 
@@ -17,12 +17,12 @@ router.post('/assetsAndLiabilities/liquidity', async (req, res) => {
 })
 
 async function process(req, res, promptGroup, endpointName) {
-    const {text} = req.body
-    if (text) {
-        await prompt(text, res, endpointName, promptGroup)
+    const {partnerId} = req.body
+    if (partnerId) {
+        await promptWithBackground(partnerId, res, endpointName, promptGroup)
     } else {
         res.status(400).json({
-            "message": "Missing property: text"
+            "message": "Missing property: partnerId"
         })
     }
 }
