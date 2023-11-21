@@ -41,7 +41,7 @@ Your output might be:
     "liquidity": [
         {{
             "asset": "Name of the money-market asset",
-            "value": "Integer representing the value of the investment",
+            "amount": "Integer representing the value of the investment",
             "currency": "SO 4217 currency code (three-letter-code)"
         }}
     ]
