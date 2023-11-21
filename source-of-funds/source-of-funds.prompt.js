@@ -1,75 +1,44 @@
-const sourceOfFundsPrompt = `
+const incomeMiscellaneousPrompt = `
 **Instruction**: 
 - Analyze the provided background data.
-- Extract details regarding the source of funds as per the structure below.
-- Ensure that your response adheres to the provided format and covers all relevant aspects.
-
-**Expected Output Structure**: 
-\`\`\`
-{{
-    "plannedInitialInvestmentChf": "Numeric value (decimal) indicating the planned initial investment",
-    "percentageOfNewWorth": "Numeric value (decimal) indicating the percentage of new worth",
-    "longTermPlannedAssetsChf": "Numeric value (decimal) indicating the long term planned assets",
-    "assetIncomingsOnBehalf": ["List of asset incomings, e.g., 'Transfer', 'InCash', 'TransferOfSecurities', 'DeliveryOfSecuritiesPreciousMetal']",
-    "incomingInstitutionBanks": [
-        {{
-            "institutionBankName": "Name of the institution/bank",
-            "placeOfTheInstitutionBank": "Place of the institution/bank",
-            "countryIsoCode": "ISO country code of the institution/bank"
-        }}
-        // ...weitere Banken
-    ],
-    "originFundsFromBusinessActivitiesChf": "Numeric value (decimal) indicating funds from business activities",
-    "originFundsFromDepositChf": "Numeric value (decimal) indicating funds from deposit",
-    "originFundsFromSaleOfInterestsChf": "Numeric value (decimal) indicating funds from the sale of interests",
-    "originFundsFromSaleOfRealEstateChf": "Numeric value (decimal) indicating funds from the sale of real estate",
-    "originFundsFromMiscellaneous": {{
-        "description": "Description of miscellaneous funds",
-        "amountChf": "Numeric value (decimal) indicating the amount of miscellaneous funds"
-    }},
-    "documentForProofOfFundsAvailable": "Boolean indicating if the document for proof of funds is available",
-    "identityOfBeneficialOwnerHasBeenVerified": "Boolean indicating if the identity of beneficial owner has been verified"
-}}
-\`\`\`
-
---- Begin Background ---
-
-{background}
-
---- End Background --- 
-`
-const incomeFromBusinessActivitiesPrompt = `
-**Instruction**:
-- Analyze the provided background data.
-- Extract details about income from business activities.
-- Your response should be structured as shown below.
+- Analyze the input for misellaneous income, source of funds, or other income
+- Focus on funds, income and disposals that do not clearly fit into categories such as business activities, salary, inheritances from whoever, investment sales or real estate sales of all kinds of buildings. As so not fit to selling interests.
+- Structure your response as shown below.
+- **Avoid assumptions**. If certain details such as the origin of the income or funds are missing, please leave them blank.
 
 **Example**:
-Background: "John's tech startup had a significant breakthrough this year, earning a profit of 500,000 CHF."
+If the background data says: "Martin received an unexpected windfall of 100,000 CHF from undisclosed sources in 2020."
 Your output might be:
 \`\`\`
-{
-    "incomeFromBusinessActivities"
+{{
+    "incomeMiscellaneous"
 :
     [
-        {
-            "description": "Profit from tech startup",
-            "amountChf": 500000
-        }
+        {{
+            "description": "Undisclosed sources windfall",
+            "amount": 100000,
+            "currency": CHF,
+            "asofdate": 2020
+        }}
     ]
-}
+}}
 \`\`\`
 
 **Expected Output Structure**:
 \`\`\`
-{
-    "incomeFromBusinessActivities": [
-        {
-            "description": "Description of the income source",
-            "amountChf": "Numeric value (decimal) indicating the amount"
-        }
+{{
+    "incomeMiscellaneous"
+:
+    [
+        {{
+            "description": "Description of the miscellaneous income source",
+            "amount": "Numeric value (decimal) indicating the amount",
+            "currency": "Currency in ISO-Code",
+            "asofdate": "End date in yyyy-mm-dd format"
+        }}
+        // ...weitere Einkommensquellen
     ]
-}
+}}
 \`\`\`
 
 --- Begin Background ---
@@ -78,40 +47,192 @@ Your output might be:
 
 --- End Background ---
 `
-const incomeFromRealEstateSalesPrompt = `
+
+const incomeFromBusinessActivitiesPrompt = `
 **Instruction**:
 - Analyze the provided background data.
-- Identify and extract details about income from the sale of real estate.
+- Focus specifically on income related to work, employment, business activities, lectures, and teaching.
+- Exclude any data related to material goods values or financial instruments such as shares.
+- Extract and analyze information regarding funds, income, and disposals from these sources.
 - Use the structure provided below for your response.
+- All miscellaneous position are not part uf business activities
+- **Avoid assumptions**. If certain details are not clearly related to the specified activities, please ignore them.
 
 **Example**:
-Background: "Mary sold her villa in Zürich last June for 1.2 million CHF."
+Background: "Sarah earned 120,000 CHF in 2020 from her role as a university lecturer and received a bonus of 30,000 CHF for her research work."
 Your output might be:
 \`\`\`
-{
-    "incomeFromRealEstateSales"
+{{
+    "incomeFromBusinessActivities"
 :
     [
-        {
-            "propertyDescription": "Villa in Zürich",
-            "saleDate": "2021-06-15",
-            "saleAmountChf": 1200000
-        }
+        {{
+            "description": "University lecturer salary",
+            "amount": 120000,
+            "currency": "CHF",
+            "asofdate": "2020"
+        }},
+        {{
+            "description": "Research work bonus",
+            "amount": 30000,
+            "currency": "CHF",
+            "asofdate": "2020"
+        }}
     ]
-}
+}}
 \`\`\`
 
 **Expected Output Structure**:
 \`\`\`
-{
-    "incomeFromRealEstateSales": [
-        {
-            "propertyDescription": "Description of the property sold",
-            "saleDate": "Date of sale (yyyy-mm-dd)",
-            "saleAmountChf": "Sale amount in CHF (numeric value)"
-        }
+{{
+    "incomeFromBusinessActivities"
+:
+    [
+        {{
+            "description": "Description of the income source related to work or activity",
+            "amount": "Numeric value indicating the amount",
+            "currency": "Currency in which the amount is denominated",
+            "asofdate": "Year of the income or activity (yyyy format)"
+        }}
+        // ...additional income sources
     ]
-}
+}}
+\`\`\`
+
+--- Begin Background ---
+
+{background}
+
+--- End Background ---
+`
+
+const incomeFromRealEstateSalesPrompt = `
+**Instruction**:
+- Analyze the provided background data.
+- Identify, analyze and extract details about any kind of income from the sale of real estate like any kind of buildings.
+- All miscellaneous position are not part uf business activities
+- Use the structure provided below for your response.
+
+**Example**:
+If the background data says: "Mary sold her villa in Zürich June 2017 for 1.2 million CHF."
+Your output might be:
+\`\`\`
+{{
+    "incomeFromRealEstateSales": [
+        {{
+            "description": "Villa in Zürich",
+            "asofdate": "2017-06-15",
+            "currency": "CHF",
+            "amount": 1200000
+        }}
+    ]
+}}
+\`\`\`
+
+**Expected Output Structure**:
+\`\`\`
+{{
+    "incomeFromRealEstateSales": [
+        {{
+            "description": "Description of the property sold",
+            "amount": "Sale amount (numeric value)",
+            "currency": "Currency in ISO-Code",
+            "asofdate": "ate of sale (yyyy-mm-dd)"
+        }}
+    ]
+}}
+\`\`\`
+
+--- Begin Background ---
+
+{background}
+
+--- End Background ---
+`
+
+const incomeFromInheritancePrompt = `
+**Instruction**:
+- Analyze the provided background data.
+- Identify, analyze and extract details about any kind of income by inheritance, heritage or legacy.
+- All miscellaneous position are not part uf business activities
+- Use the structure provided below for your response.
+
+**Example**:
+If the background data says: "Mary got a heritage by her father by 2022 of 5 Mio USD after the father died on 1.1.2021"
+Your output might be:
+\`\`\`
+{{
+    "incomeFromInheritance": [
+        {{
+            "description": "Heritage of her Father",
+            "asofdate": "2022-12-31",
+            "currency": "CHF",
+            "amount": 5000000
+        }}
+    ]
+}}
+\`\`\`
+
+**Expected Output Structure**:
+\`\`\`
+{{
+    "incomeFromInheritance": [
+        {{
+            "description": "Description of the heritage, inheritance or legacy",
+            "amount": "Amount (numeric value)",
+            "currency": "Currency in ISO-Code",
+            "asofdate": "Date of sale (yyyy-mm-dd)"
+        }}
+    ]
+}}
+\`\`\`
+
+--- Begin Background ---
+
+{background}
+
+--- End Background ---
+`
+
+const incomeFromSalesInterestPrompt  = `
+**Instruction**:
+- Analyze the provided background data.
+- Identify, analyze and extract details only about interests.
+- All miscellaneous position are not part uf business activities
+- Use the structure provided below for your response.
+
+**Example**:
+If the background data says: "Mary has selled all her interest of the family company in the june 2012 for around 2 Mio USD"
+Your output might be:
+\`\`\`
+    {{
+        "incomeFromSalesInterest"
+    :
+        [
+            {{
+            "description": "Selled interest of the company",
+            "asofdate": "2012-06-01",
+            "currency": "USD",
+            "amount": 2000000
+        }}
+    ]
+}}
+\`\`\`
+
+**Expected Output Structure**:
+\`\`\`
+    {{
+        "incomeFromSalesInterest"
+    :
+        [
+            {{
+            "description": "Description of the interest",
+            "amount": "Amount (numeric value)",
+            "currency": "Currency in ISO-Code",
+            "asofdate": "Date of sale (yyyy-mm-dd)"
+        }}
+    ]
+}}
 \`\`\`
 
 --- Begin Background ---
@@ -121,7 +242,9 @@ Your output might be:
 --- End Background ---
 `
 export {
-    sourceOfFundsPrompt,
+    incomeMiscellaneousPrompt,
     incomeFromRealEstateSalesPrompt,
-    incomeFromBusinessActivitiesPrompt
+    incomeFromBusinessActivitiesPrompt,
+    incomeFromInheritancePrompt,
+    incomeFromSalesInterestPrompt
 }
