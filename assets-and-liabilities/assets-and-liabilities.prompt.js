@@ -9,8 +9,8 @@ const liquidityAssetsPrompt = `
 **Example**: 
 If the background data says: 
 "Sarah's liquidity position is robust, evidenced by her substantial cash reserves of 500,000 CHF. Additionally, she 
-holds two specific a U.S. Treasury Bill valued at 200,000 USD and 
-a Euro-denominated Commercial Paper worth 300,000 EUR."
+holds two specific a U.S. Treasury Bill valued at 200,000 USD and a Euro-denominated Commercial Paper worth 300,000 EUR.
+There is also a portfolio holding stocks and obligations with a value of 350k USD."
 
 Your output might be:
 \`\`\`
@@ -59,6 +59,7 @@ const liquidityLiabilitiesPrompt = `
 **Instruction**: 
 - You will receive background data.
 - Determine the **short-term liabilities** of the person including: **Short-Term Loans**, **Accrued Expenses**, etc.
+- Consider liabilities with a maturity of up to one year
 - Use the structure provided below for your response.
 - **Avoid assumptions**. If certain details are absent, please leave them blank.
 
