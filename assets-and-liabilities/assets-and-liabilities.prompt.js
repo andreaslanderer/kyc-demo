@@ -1,5 +1,5 @@
 
-const liquidityPrompt = `
+const liquidityAssetsPrompt = `
 **Instruction**: 
 - You will receive background data.
 - Determine the **liquid assets** of the person including: **Cash**, **Money Market Instruments**, etc.
@@ -15,7 +15,7 @@ a Euro-denominated Commercial Paper worth 300,000 EUR."
 Your output might be:
 \`\`\`
 {{
-    "liquidity": [
+    "assetEntries": [
         {{
             "asset": "Cash",
             "amount": 500000,
@@ -38,7 +38,7 @@ Your output might be:
 **Expected Output Structure**: 
 \`\`\`
 {{
-    "liquidity": [
+    "assetEntries": [
         {{
             "asset": "Name of the money-market asset",
             "amount": "Integer representing the value of the investment",
@@ -55,6 +55,52 @@ Your output might be:
 --- End Background --- 
 `
 
+const liquidityLiabilitiesPrompt = `
+**Instruction**: 
+- You will receive background data.
+- Determine the **short-term liabilities** of the person including: **Short-Term Loans**, **Accrued Expenses**, etc.
+- Use the structure provided below for your response.
+- **Avoid assumptions**. If certain details are absent, please leave them blank.
+
+**Example**: 
+If the background data says: 
+"Sarah's liabilities include payday loans up to 200'000 CHF. In addition to that, she also has a running Lombard Loan
+with Deutsche Bank totalling 500k EUR."
+
+Your output might be:
+\`\`\`
+{{
+    "liabilityEntries": [
+        {{
+            "asset": "Payday Loan",
+            "amount": 200000,
+            "currency": "CHF"
+        }}
+    ]
+}}
+\`\`\`
+
+**Expected Output Structure**: 
+\`\`\`
+{{
+    "liabilityEntries": [
+        {{
+            "asset": "Name of the short-term liability",
+            "amount": "Integer representing the value of the liability",
+            "currency": "SO 4217 currency code (three-letter-code)"
+        }}
+    ]
+}}
+\`\`\`
+
+--- Begin Background ---
+
+{background}
+
+--- End Background --- 
+`
+
 export {
-    liquidityPrompt
+    liquidityAssetsPrompt,
+    liquidityLiabilitiesPrompt
 }
