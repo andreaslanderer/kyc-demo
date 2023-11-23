@@ -3,6 +3,7 @@ import {PromptTemplate} from "langchain/prompts";
 
 import {prompt} from "../common/llm.js";
 import {
+    correctnessPrompt,
     civilStatusPrompt,
     noChildrenPrompt,
     personalDetailsPrompt,
@@ -58,7 +59,7 @@ router.post('/familySituation/noOfChildren', cacheMiddleware(5), async (req, res
 async function process(req, res, endpointName, promptGroup) {
     const {text} = req.body
     if (text) {
-        await prompt(text, res, endpointName, promptGroup);
+        await prompt(text, res, endpointName, promptGroup, PromptTemplate.fromTemplate(correctnessPrompt));
     } else {
         res.status(400).json({
             "message": "Missing property: text"

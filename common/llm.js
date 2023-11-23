@@ -1,12 +1,33 @@
 import {search} from "./vector-store.js";
 import {COMPLETION_ENDPOINT} from "./endpoints.js";
 import {post} from "./http-client.js";
+import {correctnessPrompt} from "../family-situation/family-situation.prompt.js";
 
 // Define a regular expression pattern to match JSON objects
 const jsonRegEx = /{(?:[^{}]|{(?:[^{}]|{[^{}]*})*})*}/;
 
+async function calculateScore(correctnessPrompt, text, result) {
+    console.log(`Calculating correctness score`)
+    const formattedPrompt = await correctnessPrompt.format({
+        background: text,
+        object: JSON.stringify(result)
+    })
+    console.log(formattedPrompt)
+    const scoreObject = await getCompletion(formattedPrompt)
+    console.log(JSON.stringify(scoreObject))
+    console.log(`Successfully calculated correctness score`)
+    const match = scoreObject.match(jsonRegEx);
+    if (match && match.length > 0) {
+        const parsedScoreObject = JSON.parse(match[0])
+        result.value.score = parsedScoreObject.score
+        result.value.missingData = parsedScoreObject.missingData
+    } else {
+        result.value.score = "NOT_COMPLETE"
+        result.value.missingData = []
+    }
+}
 
-async function prompt(text, res, promptGroupName, promptGroup) {
+async function prompt(text, res, promptGroupName, promptGroup, correctnessPrompt) {
     console.log(`Calling ${promptGroupName} endpoint`)
 
     try {
@@ -14,23 +35,9 @@ async function prompt(text, res, promptGroupName, promptGroup) {
             const formattedPrompt = await p.prompt.format({
                 background: text
             })
-            console.log('Calling OpenAI service', p.information)
-            const result = await getCompletion(formattedPrompt)
-            console.log(`OpenAI service call returned successfully with result`, p.information)
-
-            const match = result.match(jsonRegEx);
-            if (match && match.length > 0) {
-                return {
-                    prop: p.information,
-                    value: JSON.parse(match[0])
-                }
-            } else {
-                console.log('No response JSON found, therefore returning an empty object', p.information)
-                return {
-                    prop: p.information,
-                    value: {}
-                }
-            }
+            const result = await callCompletion(p, formattedPrompt);
+            await calculateScore(correctnessPrompt, text, result);
+            return result
         })
 
         const resultsArray = await Promise.all(promises)
@@ -42,6 +49,26 @@ async function prompt(text, res, promptGroupName, promptGroup) {
     } catch (e) {
         console.error(`Error while calling ${promptGroupName} endpoint`, e)
         res.status(500).send(e)
+    }
+}
+
+async function callCompletion(p, formattedPrompt) {
+    console.log('Calling OpenAI service', p.information)
+    const result = await getCompletion(formattedPrompt)
+    console.log(`OpenAI service call returned successfully with result`, p.information)
+
+    const match = result.match(jsonRegEx);
+    if (match && match.length > 0) {
+        return {
+            prop: p.information,
+            value: JSON.parse(match[0])
+        }
+    } else {
+        console.log('No response JSON found, therefore returning an empty object', p.information)
+        return {
+            prop: p.information,
+            value: {}
+        }
     }
 }
 

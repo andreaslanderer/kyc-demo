@@ -163,7 +163,44 @@ Your output might be:
 
 --- End Background --- 
 `
+
+const correctnessPrompt = `
+**Instruction**: 
+* Given the following **background information** and a **JSON object** that is derived from the information, calculate a completeness score.
+* Check that all key information in the text is present in the JSON object.
+- Structure your output as described below.    
+
+**Completeness Levels**
+* COMPLETE: There is no information missing
+* OVERLY_COMPLETE: There is hardly any information missing
+* PARTIALLY_COMPLETE: There is some information missing
+* NOT_COMPLETE: There is a lot of information missing
+
+**Expected Output Structure**: 
+\`\`\`
+{{
+    "score": "one of COMPLETE, OVERLY_COMPLETE, PARTIALLY_COMPLETE, NOT_COMPLETE",
+    "missingData": "List of missing information",
+}}
+\`\`\`
+
+--- Begin Background ---
+
+{background}
+
+--- End Background --- 
+
+--- Begin JSON object ---
+
+{object}
+
+--- End JSON object --- 
+`
+
+
+
 export {
+    correctnessPrompt,
     civilStatusPrompt,
     noChildrenPrompt,
     personalDetailsPrompt,
