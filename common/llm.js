@@ -6,43 +6,47 @@ import {post} from "./http-client.js";
 const jsonRegEx = /{(?:[^{}]|{(?:[^{}]|{[^{}]*})*})*}/;
 
 
-async function prompt(text, res, promptGroupName, promptGroup) {
-    console.log(`Calling ${promptGroupName} endpoint`)
+/**
+ * This function calls the OpenAI chat completion endpoint. If the call was successful, it returns the
+ * result object. Otherwise, it will throw an exception that needs to be handled by the client.
+ *
+ * @param text The text to be inserted into the prompt
+ * @param promptGroup The array of prompts to be executed
+ * @param loggingEndpointName The endpoint name used for logging purposes
+ * @returns {Promise<{}>}  The promise containing the result object
+ */
+async function prompt(text, promptGroup, loggingEndpointName) {
+    console.log(`Calling ${loggingEndpointName} endpoint`)
 
-    try {
-        const promises = promptGroup.map(async p => {
-            const formattedPrompt = await p.prompt.format({
-                background: text
-            })
-            console.log('Calling OpenAI service', p.information)
-            const result = await getCompletion(formattedPrompt)
-            console.log(`OpenAI service call returned successfully with result`, p.information)
-
-            const match = result.match(jsonRegEx);
-            if (match && match.length > 0) {
-                return {
-                    prop: p.information,
-                    value: JSON.parse(match[0])
-                }
-            } else {
-                console.log('No response JSON found, therefore returning an empty object', p.information)
-                return {
-                    prop: p.information,
-                    value: {}
-                }
-            }
+    const promises = promptGroup.map(async p => {
+        const formattedPrompt = await p.prompt.format({
+            background: text
         })
+        console.log('Calling OpenAI service', p.information)
+        const result = await getCompletion(formattedPrompt)
+        console.log(`OpenAI service call returned successfully with result`, p.information)
 
-        const resultsArray = await Promise.all(promises)
-        const results = {}
-        resultsArray.forEach(r => results[r.prop] = r.value)
+        const match = result.match(jsonRegEx);
+        if (match && match.length > 0) {
+            return {
+                prop: p.information,
+                value: JSON.parse(match[0])
+            }
+        } else {
+            console.log('No response JSON found, therefore returning an empty object', p.information)
+            return {
+                prop: p.information,
+                value: {}
+            }
+        }
+    })
 
-        console.log(`Finished calling ${promptGroupName} endpoint`)
-        res.send(results)
-    } catch (e) {
-        console.error(`Error while calling ${promptGroupName} endpoint`, e)
-        res.status(500).send(e)
-    }
+    const resultsArray = await Promise.all(promises)
+    const results = {}
+    resultsArray.forEach(r => results[r.prop] = r.value)
+
+    console.log(`Finished calling ${loggingEndpointName} endpoint`)
+    return results
 }
 
 async function promptWithBackground(partnerId, res, promptGroupName, promptGroup) {
