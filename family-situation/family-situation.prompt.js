@@ -1,3 +1,42 @@
+
+const factListPrompt = `
+**Instruction**:
+- Examine the provided **background data**.
+- Extract key facts about the individuals mentioned, focusing on their names, relationships, locations, nationalities, and other relevant personal details.
+- Present these facts as a list in a JSON object.
+
+**Example**:
+Given the background: 
+"Paula Meier was born in Karlsruhe, Germany on 13.01.1986. She was born in a hospital. She is the youngest daughter of
+Josef and Elisabeth Meier, who also live in Karlsruhe. Her two older brothers, Paul and Erik, live in the USA and in Sweden, respectively"
+Your output might be:
+\`\`\`
+{{
+    "facts": [
+        "Paula Meier was born in Karlsruhe, Germany",
+        "She was born on 13.01.1986",
+        "Her parents are Paula Meier and Elisabeth Meier who live in Karlsruhe, Germany",
+        "She has two older brothers",
+        "Her brother Paul lives in the USA",
+        "Her brother Erik lives in Sweden"
+    ]
+}}
+\`\`\`
+
+**Expected Output Structure**: 
+\`\`\`
+{{
+    "facts": "The list of facts presented as short and concise statements"
+}}
+
+--- Begin Background ---
+
+{background}
+
+--- End Background --- 
+\`\`\`
+`
+
 const personalDetailsPrompt = `
 **Instruction**: 
 - You will receive background data about an individual.
@@ -101,6 +140,7 @@ Your output might be:
 
 --- End Background --- 
 `
+
 const relationBetweenPartnersPrompt = `
 **Instruction**: 
 - Examine the provided background data.
@@ -164,6 +204,7 @@ Your output might be:
 --- End Background --- 
 `
 export {
+    factListPrompt,
     civilStatusPrompt,
     noChildrenPrompt,
     personalDetailsPrompt,
