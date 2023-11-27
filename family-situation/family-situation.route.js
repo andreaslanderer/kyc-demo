@@ -10,7 +10,6 @@ import {
 } from "./family-situation.prompt.js";
 import {cacheMiddleware} from "../common/caching.js";
 import {
-    process,
     processWithFacts
 } from "../common/prompting.service.js";
 
@@ -63,19 +62,19 @@ router.post('/familySituation/noOfChildren', cacheMiddleware(5), async (req, res
     await processRequest(req, res, [noOfChildren], 'noOfChildren')
 })
 
-router.post('/familySituation/facts', cacheMiddleware(5), async (req, res) => {
-    await processRequest(req, res, [noOfChildren], 'noOfChildren', false)
-})
-
-async function processRequest(req, res, promptGroup, loggingEndpointName, useFacts = true) {
+async function processRequest(req, res, promptGroup, loggingEndpointName) {
+    console.log(`Calling REST endpoint.`, loggingEndpointName)
     const { text } = req.body
     if (text) {
         try {
-            let result = await (useFacts ? processWithFacts(text, promptGroup, factList, loggingEndpointName) : process(text, promptGroup, loggingEndpointName));
+            let result = processWithFacts(text, factList, ...promptGroup);
+            console.log(`Successfully called REST endpoint.`, loggingEndpointName)
             res.send(result)
         } catch (e) {
             console.error(e)
-            res.status(500).body(e)
+            res.status(500).json({
+                "message": e.message
+            })
         }
     } else {
         res.status(400).json({
