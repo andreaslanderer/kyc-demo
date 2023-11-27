@@ -9,9 +9,7 @@ import {
     relationBetweenPartnersPrompt
 } from "./family-situation.prompt.js";
 import {cacheMiddleware} from "../common/caching.js";
-import {
-    processWithFacts
-} from "../common/prompting.service.js";
+import {processRequest} from "../common/rest-controller.utils.js";
 
 const router = express.Router()
 
@@ -43,44 +41,38 @@ const familySituationPrompts = [
 ]
 
 router.post('/familySituationNew', cacheMiddleware(5), async (req, res) => {
-    await processRequest(req, res, familySituationPrompts, 'familySituation')
+    await processRequest(req, res, {
+        factPrompt: factList,
+        promptGroup: familySituationPrompts
+    })
 })
 
 router.post('/familySituation/civilStatus', cacheMiddleware(5), async (req, res) => {
-    await processRequest(req, res, [civilStatus], 'civilStatus')
+    await processRequest(req, res, {
+        factPrompt: factList,
+        promptGroup: [civilStatus]
+    })
 })
 
 router.post('/familySituation/personalDetails', cacheMiddleware(5), async (req, res) => {
-    await processRequest(req, res, [personalDetails], 'personalDetails')
+    await processRequest(req, res, {
+        factPrompt: factList,
+        promptGroup: [personalDetails]
+    })
 })
 
 router.post('/familySituation/partnerRelations', cacheMiddleware(5), async (req, res) => {
-    await processRequest(req, res, [partnerRelations], 'partnerRelations')
+    await processRequest(req, res, {
+        factPrompt: factList,
+        promptGroup: [partnerRelations]
+    })
 })
 
 router.post('/familySituation/noOfChildren', cacheMiddleware(5), async (req, res) => {
-    await processRequest(req, res, [noOfChildren], 'noOfChildren')
+    await processRequest(req, res, {
+        factPrompt: factList,
+        promptGroup: [noOfChildren]
+    })
 })
-
-async function processRequest(req, res, promptGroup, loggingEndpointName) {
-    console.log(`Calling REST endpoint.`, loggingEndpointName)
-    const { text } = req.body
-    if (text) {
-        try {
-            let result = processWithFacts(text, factList, ...promptGroup);
-            console.log(`Successfully called REST endpoint.`, loggingEndpointName)
-            res.send(result)
-        } catch (e) {
-            console.error(e)
-            res.status(500).json({
-                "message": e.message
-            })
-        }
-    } else {
-        res.status(400).json({
-            "message": "Missing input: text"
-        })
-    }
-}
 
 export { router }
