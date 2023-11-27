@@ -3,13 +3,11 @@ import {PromptTemplate} from "langchain/prompts"
 import {
     educationPrompt,
     employmentPrompt,
+    factListPrompt,
     selfEmploymentPrompt,
     unemploymentPrompt
 } from "./professional-background.prompt.js"
 import {cacheMiddleware} from "../common/caching.js";
-import {
-    processWithBackground
-} from "../common/prompting.service.js";
 import {processRequest} from "../common/rest-controller.utils.js";
 
 const router = express.Router()
@@ -43,25 +41,40 @@ const unemployment = {
     questions: [`Was the person unemployed?`],
     entries: 10
 }
+const factList = {
+    information: "facts",
+    prompt: PromptTemplate.fromTemplate(factListPrompt)
+};
 
 router.post('/professionalBackground/professionalBackgroundNew', cacheMiddleware(5), async (req, res) => {
-    await processRequest(req, res, education, employment, selfEmployment, unemployment)
+    await processRequest(req, res, {
+        factPrompt: factList,
+        promptGroup: [education, employment, selfEmployment, unemployment]
+    })
 })
 
 router.post('/professionalBackground/education', cacheMiddleware(5), async (req, res) => {
-    await processRequest(req, res, education)
+    await processRequest(req, res, {
+        promptGroup: [education]
+    })
 })
 
 router.post('/professionalBackground/employment', cacheMiddleware(5), async (req, res) => {
-    await processRequest(req, res, employment)
+    await processRequest(req, res, {
+        promptGroup: [employment]
+    })
 })
 
 router.post('/professionalBackground/unemployment', cacheMiddleware(5), async (req, res) => {
-    await processRequest(req, res, unemployment)
+    await processRequest(req, res, {
+        promptGroup: [unemployment]
+    })
 })
 
 router.post('/professionalBackground/selfEmployment', cacheMiddleware(5), async (req, res) => {
-    await processRequest(req, res, selfEmployment)
+    await processRequest(req, res, {
+        promptGroup: [selfEmployment]
+    })
 })
 
 export {

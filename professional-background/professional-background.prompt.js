@@ -1,3 +1,38 @@
+const factListPrompt = `
+**Instruction**:
+- Examine the provided **background data**.
+- Extract key facts about the individual mentioned, focusing on academic career, their employment situation, and companies they have founded
+- Present these facts as a list in a JSON object.
+
+**Example**:
+Given the background: 
+"Sarah studied Computer Science (M.Sc.) at TechUniversity from 2010 to 2014. From 2015 to 2017 she worked as a Data Scientist for IBM. 
+That's also where she met Bill & Chloe. Afterwards, she founded DataScience Corp together with Bill & Chloe."
+Your output might be:
+\`\`\`
+{{
+    "facts": [
+        "She holds a Master's degree in Computer Science from TechUniversity (2010-2014)",
+        "She worked as a Data Scientist at IB; (2015-2017)",
+        "She founded DataScience Corp together with Bill and Chloe"
+    ]
+}}
+\`\`\`
+
+**Expected Output Structure**: 
+\`\`\`
+{{
+    "facts": "The list of facts presented as short and concise statements"
+}}
+
+--- Begin Background ---
+
+{background}
+
+--- End Background --- 
+\`\`\`
+`
+
 const educationPrompt = `
 **Instruction**: 
 - You will receive background data.
@@ -223,6 +258,7 @@ const selfEmploymentPrompt = `
     --- End Background --- 
 `
 export {
+    factListPrompt,
     educationPrompt,
     employmentPrompt,
     selfEmploymentPrompt,
