@@ -10,6 +10,7 @@ import {cacheMiddleware} from "../common/caching.js";
 import {
     processWithBackground
 } from "../common/prompting.service.js";
+import {processRequest} from "../common/rest-controller.utils.js";
 
 const router = express.Router()
 
@@ -62,25 +63,6 @@ router.post('/professionalBackground/unemployment', cacheMiddleware(5), async (r
 router.post('/professionalBackground/selfEmployment', cacheMiddleware(5), async (req, res) => {
     await processRequest(req, res, selfEmployment)
 })
-
-async function processRequest(req, res, ...promptGroup) {
-    const { partnerId } = req.body
-    if (partnerId) {
-        try {
-            let result = await processWithBackground(partnerId, ...promptGroup);
-            res.send(result)
-        } catch (e) {
-            console.error(e)
-            res.status(500).json({
-                "message": e.message
-            })
-        }
-    } else {
-        res.status(400).json({
-            "message": "Missing input: text"
-        })
-    }
-}
 
 export {
     router
