@@ -25,7 +25,6 @@ async function prompt(text, currentPrompt) {
     if (match && match.length > 0) {
         const resultObject = JSON.parse(match[0])
         resultObject["background"] = text
-        console.log(resultObject)
         return resultObject
     } else {
         console.log('No response JSON found, therefore returning an empty object.', currentPrompt.information)
