@@ -1,8 +1,8 @@
 import {prompt} from "./llm.js";
 import {search} from "./vector-store.js";
 
-async function processWithFacts(text, factPrompt, ...promptGroup) {
-    const facts = await process(text, factPrompt, 'facts')
+async function processWithFacts(text, factPrompt, promptGroup) {
+    const facts = await process(text, factPrompt)
     const factsString = JSON.stringify(facts)
     const promises = promptGroup.map(async currentPrompt => {
         return await process(factsString, currentPrompt)
@@ -16,11 +16,11 @@ async function processWithFacts(text, factPrompt, ...promptGroup) {
     return results
 }
 
-async function processWithBackground(partnerId, ...promptGroup) {
+async function processWithBackground(partnerId, { factPrompt, promptGroup = [] }) {
     const promises = promptGroup.map(async currentPrompt => {
         const background = await getBackground(partnerId, currentPrompt)
         const backgroundString = JSON.stringify(background)
-        return await process(backgroundString, currentPrompt)
+        return await process(backgroundString, currentPrompt, factPrompt)
     })
     const resultsArray = await Promise.all(promises)
     const results = {}
@@ -47,7 +47,12 @@ async function getEmbeddings(question, partnerId, entries) {
         .reduce((acc, cv) => { return acc + '\n' + cv }, '')
 }
 
-async function process(text, currentPrompt) {
+async function process(text, currentPrompt, factPrompt=undefined) {
+    if (factPrompt !== undefined) {
+        const facts = await process(text, factPrompt)
+        const factsString = JSON.stringify(facts["facts"])
+        return await prompt(factsString, currentPrompt)
+    }
     return await prompt(text, currentPrompt);
 }
 

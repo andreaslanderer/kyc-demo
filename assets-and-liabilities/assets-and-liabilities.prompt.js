@@ -1,3 +1,41 @@
+const factListPrompt = `
+**Instruction**:
+- Examine the provided **background data**.
+- Extract key facts about the individual mentioned, focusing on investments, assets, liabilities, loans, and credits
+- Present these facts as a list in a JSON object.
+
+**Example**:
+Given the background: 
+"Sarah's liquidity position is robust, evidenced by her substantial cash reserves of 500,000 CHF. Additionally, she 
+holds two specific U.S. Treasury Bill valued at 200,000 USD and a Euro-denominated Commercial Paper worth 300,000 EUR.
+Her liabilities include payday loans up to 200'000 CHF. In addition to that, she also has a long-running Lombard Loan
+with Deutsche Bank totalling 500k EUR."
+Your output might be:
+\`\`\`
+{{
+    "facts": [
+        "Sarah has cash reserves of 500'000 CHF",
+        "She holds two Treasury Bill valued at 200,000 USD",
+        "She holds a Euro-denominated Commercial Paper worth 300,000 EUR",
+        "She has payday loans up to 200'000 CHF",
+        "She has a long-running Lombard Loan with Deutsche Bank totalling 500k EUR."
+    ]
+}}
+\`\`\`
+
+**Expected Output Structure**: 
+\`\`\`
+{{
+    "facts": "The list of facts presented as short and concise statements"
+}}
+
+--- Begin Background ---
+
+{background}
+
+--- End Background --- 
+\`\`\`
+`
 
 const liquidityAssetsPrompt = `
 **Instruction**: 
@@ -65,7 +103,7 @@ const liquidityLiabilitiesPrompt = `
 
 **Example**: 
 If the background data says: 
-"Sarah's liabilities include payday loans up to 200'000 CHF. In addition to that, she also has a running Lombard Loan
+"Sarah's liabilities include payday loans up to 200'000 CHF. In addition to that, she also has a long-running Lombard Loan
 with Deutsche Bank totalling 500k EUR."
 
 Your output might be:
@@ -102,6 +140,7 @@ Your output might be:
 `
 
 export {
+    factListPrompt,
     liquidityAssetsPrompt,
     liquidityLiabilitiesPrompt
 }
