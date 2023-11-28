@@ -1,21 +1,6 @@
 import {prompt} from "./llm.js";
 import {search} from "./vector-store.js";
 
-async function processWithFacts(text, factPrompt, promptGroup) {
-    const facts = await process(text, factPrompt)
-    const factsString = JSON.stringify(facts)
-    const promises = promptGroup.map(async currentPrompt => {
-        return await process(factsString, currentPrompt)
-    })
-    const resultsArray = await Promise.all(promises)
-    const results = {}
-    resultsArray.forEach((actualResult, index) => {
-        const property = promptGroup[index].information
-        results[property] = actualResult
-    })
-    return results
-}
-
 async function processWithBackground(partnerId, { factPrompt, promptGroup = [] }) {
     const promises = promptGroup.map(async currentPrompt => {
         const background = await getBackground(partnerId, currentPrompt)
@@ -57,6 +42,5 @@ async function process(text, currentPrompt, factPrompt=undefined) {
 }
 
 export {
-    processWithBackground,
-    processWithFacts
+    processWithBackground
 }
