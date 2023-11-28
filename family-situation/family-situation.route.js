@@ -15,19 +15,44 @@ const router = express.Router()
 
 const civilStatus = {
     information: "civilStatus",
-    prompt: PromptTemplate.fromTemplate(civilStatusPrompt)
+    prompt: PromptTemplate.fromTemplate(civilStatusPrompt),
+    questions: [
+        `What is the civil status of the person?`,
+        `Is the person married?`,
+        `Is the person widowed?`
+    ],
+    entries: 5
 };
 const personalDetails = {
     information: "personalDetails",
-    prompt: PromptTemplate.fromTemplate(personalDetailsPrompt)
+    prompt: PromptTemplate.fromTemplate(personalDetailsPrompt),
+    questions: [
+        `What is the name of the person?`,
+        `When was the person born?`,
+        `Where does the person live?`,
+        `What is the nationality of the person?`
+    ],
+    entries: 5
 };
 const partnerRelations = {
     information: "partnerRelations",
-    prompt: PromptTemplate.fromTemplate(relationBetweenPartnersPrompt)
+    prompt: PromptTemplate.fromTemplate(relationBetweenPartnersPrompt),
+    questions: [
+        `Who is part of the person's family`,
+        `Who is is the person related to?`,
+        `Does the person have children?`
+    ],
+    entries: 5
 };
 const noOfChildren = {
     information: "noOfChildren",
-    prompt: PromptTemplate.fromTemplate(noChildrenPrompt)
+    prompt: PromptTemplate.fromTemplate(noChildrenPrompt),
+    questions: [
+        `Who are the person's children?`,
+        `Does the person have sons?`,
+        `Does the person have daughters?`
+    ],
+    entries: 5
 };
 const factList = {
     information: "facts",
