@@ -4,8 +4,8 @@ import { router as assetsAndLiabilitiesRouter } from './financial-situation/asse
 import { router as createEmbeddingsRouter } from './create-embeddings/create-embeddings.route.js'
 import { router as familySituationRouter } from './family-situation/family-situation.route.js'
 import { router as professionalBackgroundRouter } from './professional-background/professional-background.route.js'
-import { router as sourceOfFundsRouter } from './source-of-funds/source-of-funds.route.js'
 import { router as sourceOfWealthRouter } from './financial-situation/source-of-wealth.route.js'
+import { router as sourceOfFundsRouter } from './financial-situation/source-of-funds.route.js'
 import {COMPLETION_ENDPOINT, EMBEDDING_ENDPOINT, SEARCH_ENDPOINT} from "./common/endpoints.js";
 
 const app = express()

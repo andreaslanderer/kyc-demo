@@ -43,7 +43,7 @@ const sourceOfWealthPrompt = `
 
 **Example**: 
 If the background data says: 
-""Sarah's liquidity position is robust, evidenced by her substantial cash reserves of 500,000 CHF. She works an an
+"Sarah's liquidity position is robust, evidenced by her substantial cash reserves of 500,000 CHF. She works an an
 investment banker at UBS, where she earns 200k CHF per year. She also has a portfolio of stocks and obligations with 
 a value of 350k USD. She inherited 1 million CHF from her father, who passed away in 2019. In addition, she has rental 
 income of 100,000 EUR annually."
@@ -55,17 +55,20 @@ Your output might be:
         {{
             "type": "SALARY",
             "amount": 200000,
-            "currency": "CHF"
+            "currency": "CHF",
+            "year": ""
         }},
         {{
-            "asset": "INHERITANCE",
+            "type": "INHERITANCE",
             "amount": 1000000,
-            "currency": "CHF"
+            "currency": "CHF",
+            "year": "2019"
         }},
         {{
-            "asset": "INVESTMENT_INCOME",
+            "type": "INVESTMENT_INCOME",
             "amount": 100000,
-            "currency": "EUR"
+            "currency": "EUR",
+            "year": ""
         }}
     ]
 }}
@@ -78,7 +81,8 @@ Your output might be:
         {{
             "type": "Source of wealth type (one of: "SALARY", "BONUS", "INVESTMENT_INCOME", "INHERITANCE", "GIFT", "SALE_OF_BUSINESS", "SALE_OF_PROPERTY", "SALE_OF_ASSETS", "PENSION", "UNKNOWN")",
             "amount": "Integer representing the value of the investment",
-            "currency": "SO 4217 currency code (three-letter-code)"
+            "currency": "SO 4217 currency code (three-letter-code)",
+            "year": "Year when the source of wealth was received" 
         }}
     ]
 }}
