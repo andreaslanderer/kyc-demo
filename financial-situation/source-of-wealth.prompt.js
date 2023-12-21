@@ -53,17 +53,17 @@ Your output might be:
 {{
     "entries": [
         {{
-            "type": "Income",
+            "type": "SALARY",
             "amount": 200000,
             "currency": "CHF"
         }},
         {{
-            "asset": "Inheritance",
+            "asset": "INHERITANCE",
             "amount": 1000000,
             "currency": "CHF"
         }},
         {{
-            "asset": "Rent",
+            "asset": "INVESTMENT_INCOME",
             "amount": 100000,
             "currency": "EUR"
         }}
@@ -76,7 +76,7 @@ Your output might be:
 {{
     "entries": [
         {{
-            "type": "Source of wealth type (e.g., Income, Inheritance, etc.)",
+            "type": "Source of wealth type (one of: "SALARY", "BONUS", "INVESTMENT_INCOME", "INHERITANCE", "GIFT", "SALE_OF_BUSINESS", "SALE_OF_PROPERTY", "SALE_OF_ASSETS", "PENSION", "UNKNOWN")",
             "amount": "Integer representing the value of the investment",
             "currency": "SO 4217 currency code (three-letter-code)"
         }}
